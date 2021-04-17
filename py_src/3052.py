@@ -9,6 +9,5 @@ for i in range(42):
     if i in a:
         c += 1
 
-print(a)
 print(c)
 
