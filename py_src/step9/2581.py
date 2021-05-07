@@ -17,4 +17,4 @@ if sum(b) == 0:
     print(-1)
 else:
     print(sum(b))
-    print(b[0])
+    print(b[0]) 
