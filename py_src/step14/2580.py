@@ -1,39 +1,34 @@
-import sys
-import itertools
+def squre(x, y):
+    return (x//3)*3 + y//3
 
-board = [list(map(int, sys.stdin.readline().split())) for _ in range(9)]
-zero_pos = [(x,y) for x in range(9) for y in range(9) if board[x][y] == 0]
-z_len = len(zero_pos)
-offset = list(itertools.product([1,-1,0],repeat=2))
-offset_pos = [1]*3+[4]*3+[7]*3
-finished = False
-def choice(x,y):
-    nums = list(range(1,10))
-    for n in range(9):
-        if board[x][n] in nums:
-            nums.remove(board[x][n])
-        if board[n][y] in nums:
-            nums.remove(board[n][y])
-    for off in offset:
-        dx = offset_pos[x]+off[0]
-        dy = offset_pos[y]+off[1]
-        if board[dx][dy] in nums:
-            nums.remove(board[dx][dy])
-    return nums
-
-def dfs(cur):
-    global finished
-    if finished == True :
-        return
-    if cur == z_len:
-        for item in board:
-            print(*item)
-        finished = True
-        return
+def dfs(n):
+    if n == 81:
+        for i in B:
+            print(' '.join(map(str, i)))
+        return True
+    x = n // 9
+    y = n % 9
+    if B[x][y] != 0:
+        return dfs(n+1)
     else:
-        (x,y) = zero_pos[cur]
-        for c in choice(x,y):
-            board[x][y] = c
-            dfs(cur+1)
-            board[x][y] = 0
+        for i in range(1, 10):
+            if c1[x][i] == False and c2[y][i] == False and c3[squre(x, y)][i] == False:
+                c1[x][i] = c2[y][i] = c3[squre(x, y)][i] = True
+                B[x][y] = i
+                if dfs(n+1):
+                    return True
+                B[x][y] = 0
+                c1[x][i] = c2[y][i] = c3[squre(x, y)][i] = False
+    return False
+
+B = [list(map(int, input().split())) for _ in range(9)]
+c1 = [[False]*10 for _ in range(9)]
+c2 = [[False]*10 for _ in range(9)]
+c3 = [[False]*10 for _ in range(9)]
+for i in range(9):
+    for j in range(9):
+        if B[i][j] != 0:
+            c1[i][B[i][j]] = True
+            c2[j][B[i][j]] = True
+            c3[squre(i, j)][B[i][j]] = True
 dfs(0)
