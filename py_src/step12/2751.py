@@ -8,4 +8,4 @@ for _ in range(n):
     n_list.append(a)
 
 for i in sorted(n_list):
-    sys.stdout.write(str(i)+'\n')
+    sys.stdout.write(str(i) + '\n')
