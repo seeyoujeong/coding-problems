@@ -1,4 +1,5 @@
-# 백준 문제
+# Baekjoon
 
-**단계별로 풀어보기**  
-python과 c++을 사용
+https://www.acmicpc.net/step
+
+using python and c++
