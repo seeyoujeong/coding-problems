@@ -56,3 +56,27 @@ int main()
         cout << num_count[i] << '\n';
     }
 }
+
+// 다른 정답
+
+// int main()
+// {
+// 	int A, B, C, index, numArray[10]={0,};
+// 	long long int result;
+	
+// 	cin >> A >> B >> C;
+	
+// 	result = A * B * C;
+	
+// 	while(result >= 1)
+// 	{
+// 		index = result % 10;
+// 		numArray[index]++;
+// 		result /= 10;
+// 	}
+	
+// 	for(int i = 0; i < 10 ;i++)
+// 	{
+// 		cout << numArray[i] << '\n';
+// 	}
+// }
