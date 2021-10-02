@@ -2,4 +2,4 @@
 
 https://www.acmicpc.net/step
 
-using python, c++, node.js
+using python, c++, javascript
