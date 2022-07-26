@@ -11,4 +11,6 @@ def solution(n):
     
     return answer
     
-    # return list(map(int, reversed(str(n))))
+# 다른 풀이
+# def solution(n):
+#     return list(map(int, reversed(str(n))))
