@@ -1,0 +1,26 @@
+// 나누어 떨어지는 숫자 배열
+
+function solution(arr, divisor) {
+  var answer = [];
+
+  for (let i of arr) {
+    if (i % divisor == 0) {
+      answer.push(i);
+    }
+  }
+
+  if (answer.length == 0) {
+    answer.push(-1);
+  }
+
+  answer.sort((a, b) => a - b);
+
+  return answer;
+}
+
+// 다른 풀이
+// function solution(arr, divisor) {
+//   var answer = arr.filter(v => v % divisor == 0);
+
+//   return answer.length == 0 ? [-1] : answer.sort((a, b) => a - b);
+// }
