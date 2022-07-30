@@ -15,4 +15,4 @@ function solution(n) {
 }
 
 // 다른 풀이
-// const waterMelon = n => "수박".repeat(n).slice(0,n);
+// var answer = n => "수박".repeat(n).slice(0, n);

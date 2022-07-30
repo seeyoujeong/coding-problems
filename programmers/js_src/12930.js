@@ -21,6 +21,6 @@ function solution(s) {
 }
 
 // 다른 풀이
-// function toWeirdCase(s){
-//   return s.toUpperCase().replace(/(\w)(\w)/g, function(a){return a[0].toUpperCase()+a[1].toLowerCase();});
+// function solution(s) {
+//   return s.toUpperCase().replace(/(\w)(\w)/g, function(a) { return a[0].toUpperCase() + a[1].toLowerCase(); });
 // }

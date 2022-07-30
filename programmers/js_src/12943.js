@@ -28,6 +28,6 @@ function solution(num) {
 }
 
 // 다른 풀이
-// function collatz(num,count = 0) {
-//   return num == 1 ? (count >= 500 ? -1 : count) : collatz(num % 2 == 0 ? num / 2 : num * 3 + 1,++count);
+// function solution(num,count = 0) {
+//   return num == 1 ? (count >= 500 ? -1 : count) : solution(num % 2 == 0 ? num / 2 : num * 3 + 1, ++count);
 // }

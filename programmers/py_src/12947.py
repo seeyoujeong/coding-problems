@@ -12,5 +12,5 @@ def solution(x):
     return answer
   
 # 다른 풀이
-# def Harshad(n):
+# def solution(n):
 #     return n % sum([int(c) for c in str(n)]) == 0
