@@ -57,7 +57,7 @@ function solution(s) {
   return answer;
 }
 
-function solution(s){
+function solution(s) {
   var answer = true;
   let count = 0;
 
