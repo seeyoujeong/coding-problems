@@ -34,28 +34,28 @@
 //   return answer;
 // }
 
-function solution(s) {
-  var answer = true;
-  let arr = [];
+// function solution(s) {
+//   var answer = true;
+//   let arr = [];
   
-  s = s.split('');
+//   s = s.split('');
   
-  while (s.length) {  
-    arr.push(s.pop());
+//   while (s.length) {  
+//     arr.push(s.pop());
     
-    if (arr.slice(-1) == ')' && s.slice(-1) == '(') {
-      arr.pop();
-      s.pop();
-    } else if (arr.slice(-2, -1) == ')' && arr.slice(-1) == '(') {
-      arr.pop();
-      arr.pop();
-    }
-  }
+//     if (arr.slice(-1) == ')' && s.slice(-1) == '(') {
+//       arr.pop();
+//       s.pop();
+//     } else if (arr.slice(-2, -1) == ')' && arr.slice(-1) == '(') {
+//       arr.pop();
+//       arr.pop();
+//     }
+//   }
   
-  answer = arr.length === 0 ? true : false;
+//   answer = arr.length === 0 ? true : false;
 
-  return answer;
-}
+//   return answer;
+// }
 
 function solution(s) {
   var answer = true;
