@@ -3,7 +3,7 @@
 function solution(A,B){
   var answer = 0;
 
-  // 비효율
+  // 효율↓
   // while (A.length) {
   //     answer += Math.max(...A) * Math.min(...B);
 

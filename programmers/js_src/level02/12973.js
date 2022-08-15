@@ -1,6 +1,6 @@
 // 짝지어 제거하기
 
-// 비효율
+// 효율↓
 // function solution(s) {
 //   var answer = -1;
 //   s = s.split('');

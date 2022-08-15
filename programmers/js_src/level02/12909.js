@@ -1,6 +1,6 @@
 // 올바른 괄호
 
-// 비효율
+// 효율↓
 // function solution(s) {
 //   var answer = true;
 
