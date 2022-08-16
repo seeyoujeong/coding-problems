@@ -1,5 +1,4 @@
 // N개의 최소공배수
-
 function solution(arr) {
   var answer = 0;
   
@@ -29,5 +28,3 @@ function gcd(n, m) {
 function lcm(n, m) {
   return n * m / gcd(n, m);
 }
-
-console.log(2 % 4);

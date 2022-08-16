@@ -1,5 +1,4 @@
 // 제일 작은 수 제거하기
-
 function solution(arr) {
   var answer = [];
 

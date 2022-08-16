@@ -1,5 +1,4 @@
 // 시저 암호
-
 function solution(s, n) {
   var answer = '';
 

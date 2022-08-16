@@ -1,5 +1,4 @@
 // 피보나치 수
-
 function solution(n) {
   var answer = 0;
   let d = Array(n).fill(0);

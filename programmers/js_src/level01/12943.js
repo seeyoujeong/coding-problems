@@ -1,5 +1,4 @@
 // 콜라츠 추측
-
 function solution(num) {
   var answer = 0;
   var count = 0;

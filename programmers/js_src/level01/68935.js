@@ -1,5 +1,4 @@
 // 3진법 뒤집기
-
 function solution(n) {
   var answer = 0;
 

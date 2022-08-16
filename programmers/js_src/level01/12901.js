@@ -1,5 +1,4 @@
 // 2016년
-
 function solution(a, b) {
   var answer = '';
   var day = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

@@ -1,5 +1,4 @@
 // 소수 만들기
-
 function solution(nums) {
   var answer = 0;
 
@@ -25,6 +24,7 @@ function isPrime(num) {
         return false;
       }
     }
+    
     return true;
   }
 }

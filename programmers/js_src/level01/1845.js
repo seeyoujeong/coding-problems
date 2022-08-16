@@ -1,5 +1,4 @@
 // 폰켓몬
-
 function solution(nums) {
   var answer = 0;
   var numsSet = new Set(nums);

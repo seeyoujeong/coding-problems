@@ -1,5 +1,4 @@
 // 실패율
-
 function solution(N, stages) {
   var answer = [];
   const failureRate = {};

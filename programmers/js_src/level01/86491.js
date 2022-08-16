@@ -1,5 +1,4 @@
 // 최소직사각형
-
 function solution(sizes) {
   var answer = 0;
   var maxSize = [];

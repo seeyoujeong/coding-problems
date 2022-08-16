@@ -1,5 +1,4 @@
 // 소수 찾기
-
 function solution(n) {
   var answer = 0;
 

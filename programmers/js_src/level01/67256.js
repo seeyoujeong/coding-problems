@@ -1,5 +1,4 @@
 // 키패드 누르기
-
 function solution(numbers, hand) {
   var answer = '';
   const leftHand = {

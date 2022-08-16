@@ -1,5 +1,4 @@
 // 나머지 1이 되는 수 찾기
-
 function solution(n) {
   var answer = 0;
 

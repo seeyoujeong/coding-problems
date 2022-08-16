@@ -1,5 +1,4 @@
 // 내적
-
 function solution(a, b) {
   var answer = 0;
 
@@ -11,6 +10,6 @@ function solution(a, b) {
 }
 
 // 다른 풀이
-function solution(a, b) {
-  return a.reduce((acc, _, i) => acc += a[i] * b[i], 0);
-}
+// function solution(a, b) {
+//   return a.reduce((acc, _, i) => acc += a[i] * b[i], 0);
+// }

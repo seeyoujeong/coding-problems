@@ -1,5 +1,4 @@
 // 부족한 금액 계산하기
-
 function solution(price, money, count) {
   var answer = -1;
   var priceSum = 0;

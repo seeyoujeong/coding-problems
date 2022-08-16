@@ -1,5 +1,4 @@
 // [1차] 다트 게임 
-
 function solution(dartResult) {
   var answer = 0;
   let result = [];

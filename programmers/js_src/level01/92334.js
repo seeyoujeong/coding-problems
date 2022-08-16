@@ -1,36 +1,4 @@
 // 신고 결과 받기
-
-// 비효율
-// function solution(id_list, report, k) {
-//   var answer = Array(id_list.length).fill(0);
-//   let count = Array(id_list.length).fill(0);
-//   let report_id = [];
-  
-//   report = [...new Set(report)];
-  
-//   report.forEach(contents => count[id_list.indexOf(contents.split(' ')[1])]++);
-  
-//   id_list.forEach(id => {
-//     report_id.push(report.map(contents => {
-//       let content = contents.split(' ');
-//       if (id == content[0]) {
-//         return content[1];
-//       }
-//     }))
-//   });
-  
-//   report_id.forEach((ids, index) => {
-//     ids.forEach(id => {
-//       if (count[id_list.indexOf(id)] >= k) {
-//         answer[index]++;
-//       }
-//     });
-//   });
-                 
-//   return answer;
-// }
-
-// 참고: https://school.programmers.co.kr/questions/30817
 function solution(id_list, report, k) {
   var answer = [];
   const reportSet = [...new Set(report)];
@@ -60,6 +28,66 @@ function solution(id_list, report, k) {
 
   return answer;
 }
+
+// 효율↓
+// function solution(id_list, report, k) {
+//   var answer = Array(id_list.length).fill(0);
+//   let count = Array(id_list.length).fill(0);
+//   let report_id = [];
+  
+//   report = [...new Set(report)];
+  
+//   report.forEach(contents => count[id_list.indexOf(contents.split(' ')[1])]++);
+  
+//   id_list.forEach(id => {
+//     report_id.push(report.map(contents => {
+//       let content = contents.split(' ');
+//       if (id == content[0]) {
+//         return content[1];
+//       }
+//     }))
+//   });
+  
+//   report_id.forEach((ids, index) => {
+//     ids.forEach(id => {
+//       if (count[id_list.indexOf(id)] >= k) {
+//         answer[index]++;
+//       }
+//     });
+//   });
+                 
+//   return answer;
+// }
+
+// 참고 풀이
+// function solution(id_list, report, k) {
+//   const reportSet = new Set(report);
+//   const reportedCount = {};
+//   const reportedBy = {};
+//   const mailCount = {};
+
+//   id_list.forEach((element) => {
+//     reportedCount[element] = 0;
+//     mailCount[element] = 0;
+//     reportedBy[element] = [];
+//   });
+
+//   reportSet.forEach((element) => {
+//     const [id, reported] = element.split(" ");
+//     reportedCount[reported] += 1;
+//     reportedBy[reported].push(id);
+//   });
+
+//   for (const reportedId in reportedCount) {
+//     if (reportedCount[reportedId] >= k) {
+//       reportedBy[reportedId].forEach((reporter) => {
+//         mailCount[reporter] += 1;
+//       });
+//     }
+//   }
+
+//   return id_list.map((id) => mailCount[id]);
+// }
 
 // 다른 풀이
 // function solution(id_list, report, k) {

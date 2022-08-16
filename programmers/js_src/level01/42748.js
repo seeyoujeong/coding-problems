@@ -1,5 +1,4 @@
 // K번째수
-
 function solution(array, commands) {
   var answer = [];
 

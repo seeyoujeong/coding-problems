@@ -1,5 +1,4 @@
 // 수박수박수박수박수박수?
-
 function solution(n) {
   var answer = '';
   

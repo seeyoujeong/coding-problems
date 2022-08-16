@@ -1,5 +1,4 @@
 // 모의고사
-
 function solution(answers) {
   var answer = [];
   let spj1 = '12345';

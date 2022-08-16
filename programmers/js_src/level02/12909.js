@@ -1,4 +1,18 @@
 // 올바른 괄호
+function solution(s) {
+  var answer = true;
+  let count = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === '(') count++;
+    if (s[i] === ')') count--;
+    if (count < 0) break;
+  }
+
+  answer = count ? false : true;
+
+  return answer;
+}
 
 // 효율↓
 // function solution(s) {
@@ -56,18 +70,3 @@
 
 //   return answer;
 // }
-
-function solution(s) {
-  var answer = true;
-  let count = 0;
-
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === '(') count++;
-    if (s[i] === ')') count--;
-    if (count < 0) break;
-  }
-
-  answer = count ? false : true;
-
-  return answer;
-}

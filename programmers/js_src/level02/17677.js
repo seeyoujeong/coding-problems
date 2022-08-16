@@ -1,5 +1,4 @@
 // [1차] 뉴스 클러스터링
-
 function solution(str1, str2) {
   var answer = 0;
   let str1Multiset = getMultiset(str1);

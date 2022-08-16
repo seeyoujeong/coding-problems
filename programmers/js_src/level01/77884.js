@@ -1,5 +1,4 @@
 // 약수의 개수와 덧셈
-
 function solution(left, right) {
   var answer = 0;
   let count;

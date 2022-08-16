@@ -1,5 +1,4 @@
 // 숫자 문자열과 영단어
-
 function solution(s) {
   var answer = 0;
   const engNum = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];

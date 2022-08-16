@@ -1,5 +1,4 @@
 // JadenCase 문자열 만들기
-
 function solution(s) {
   var answer = '';
   let regexp = /^\d/;

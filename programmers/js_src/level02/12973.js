@@ -1,4 +1,25 @@
 // 짝지어 제거하기
+function solution(s) {
+  var answer = -1;
+  let result = [];
+  s = s.split('');
+
+  for (let i = 0; i < s.length; i++) {
+    if (result[result.length - 1] == s[i]) {
+      result.pop();
+    } else {
+      result.push(s[i]);
+    }
+  }
+
+  if (result.length == 0) {
+    answer = 1;
+  } else {
+    answer = 0;
+  }
+
+  return answer;
+}
 
 // 효율↓
 // function solution(s) {
@@ -42,25 +63,3 @@
 
 //   return answer;
 // }
-
-function solution(s) {
-  var answer = -1;
-  let result = [];
-  s = s.split('');
-
-  for (let i = 0; i < s.length; i++) {
-    if (result[result.length - 1] == s[i]) {
-      result.pop();
-    } else {
-      result.push(s[i]);
-    }
-  }
-
-  if (result.length == 0) {
-    answer = 1;
-  } else {
-    answer = 0;
-  }
-
-  return answer;
-}

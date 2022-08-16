@@ -1,7 +1,5 @@
 // 같은 숫자는 싫어
-
-function solution(arr)
-{
+function solution(arr) {
   var answer = [];
   var temp;
 

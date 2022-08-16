@@ -1,5 +1,4 @@
 // 신규 아이디 추천
-
 function solution(new_id) {
   var answer = '';
   

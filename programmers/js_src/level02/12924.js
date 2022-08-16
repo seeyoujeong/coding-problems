@@ -1,5 +1,4 @@
 // 숫자의 표현
-
 function solution(n) {
   var answer = 0;
   let num = n;

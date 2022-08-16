@@ -1,5 +1,4 @@
 // 약수의 합
-
 function solution(n) {
   var answer = 0;
 

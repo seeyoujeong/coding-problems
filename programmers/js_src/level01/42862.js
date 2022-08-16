@@ -1,5 +1,4 @@
 // 체육복
-
 function solution(n, lost, reserve) {
   var answer = 0;
 
@@ -28,9 +27,11 @@ function solution(n, lost, reserve) {
 // function solution(n, lost, reserve) {
 //   const students = {};
 //   let answer = 0;
+
 //   for(let i = 1; i <= n; i++){
 //     students[i] = 1;
 //   }
+
 //   lost.forEach(number => students[number] -= 1);
 //   reserve.forEach(number => students[number] += 1);
 
@@ -43,10 +44,12 @@ function solution(n, lost, reserve) {
 //       students[i]--;
 //     }
 //   }
+
 //   for(let key in students){
 //       if(students[key] >= 1){
 //           answer++;
 //       }
 //   }
+
 //   return answer;
 // }

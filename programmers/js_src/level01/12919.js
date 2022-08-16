@@ -1,5 +1,4 @@
 // 서울에서 김서방 찾기
-
 function solution(seoul) {
   var answer = '';
 

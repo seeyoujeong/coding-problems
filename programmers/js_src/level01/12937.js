@@ -1,5 +1,4 @@
 // 짝수와 홀수
-
 function solution(num) {
   var answer = '';
 

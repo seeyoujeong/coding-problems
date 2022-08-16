@@ -1,16 +1,6 @@
 // 완주하지 못한 선수
-
 function solution(participant, completion) {
   var answer = '';
-
-  // 효율↓
-  // completion.forEach(c => {
-  //   if (participant.includes(c)) {
-  //     participant.splice(participant.indexOf(c), 1);
-  //   }
-  // });
-  
-  // answer = participant[0];
   
   participant.sort();
   completion.sort();
@@ -24,6 +14,21 @@ function solution(participant, completion) {
   
   return answer;
 }
+
+// 효율↓
+// function solution(participant, completion) {
+//   var answer = '';
+
+//   completion.forEach(c => {
+//     if (participant.includes(c)) {
+//       participant.splice(participant.indexOf(c), 1);
+//     }
+//   });
+  
+//   answer = participant[0];
+  
+//   return answer;
+// }
 
 // 다른 풀이
 // function solution(participant, completion) {

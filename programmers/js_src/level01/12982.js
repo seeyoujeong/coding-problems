@@ -1,5 +1,4 @@
 // 예산
-
 function solution(d, budget) {
   var answer = 0;
   let sum = 0;
