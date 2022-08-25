@@ -7,23 +7,23 @@ function solution(m, musicinfos) {
   m = replaceSharp(m);
 
   for (let info of musicinfos) {
-      let startTime = info[0].split(':');
-      let endTime = info[1].split(':');
+    let startTime = info[0].split(':');
+    let endTime = info[1].split(':');
 
-      if (startTime[0] > endTime[0]) {
-        endTime[0] = 24 + +endTime[0];
-      }
+    if (startTime[0] > endTime[0]) {
+      endTime[0] = 24 + +endTime[0];
+    }
 
-      let time = ((+endTime[0] - +startTime[0]) * 60) + +endTime[1] - +startTime[1];
-      let title = info[2];
+    let time = ((+endTime[0] - +startTime[0]) * 60) + +endTime[1] - +startTime[1];
+    let title = info[2];
 
-      info[3] = replaceSharp(info[3]);
+    info[3] = replaceSharp(info[3]);
 
-      let sheet = info[3].length > time ? 
-        info[3].slice(0, time) : 
-        info[3].repeat(Math.ceil(time / info[3].length));
+    let sheet = info[3].length > time ? 
+      info[3].slice(0, time) : 
+      info[3].repeat(Math.ceil(time / info[3].length));
 
-      musicInfos.push([time, title, sheet]);
+    musicInfos.push([time, title, sheet]);
   }
 
   musicInfos = musicInfos.filter(info => info[2].includes(m));
