@@ -1,3 +1,4 @@
+// 방문 길이
 function solution(dirs) {
   var answer = 0;
   let record = new Set();
