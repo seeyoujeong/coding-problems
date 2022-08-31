@@ -2,14 +2,12 @@
 function solution(brown, yellow) {
   var answer = [];
   let yellowSizeArray = [];
-  let yelloWidth = 0;
   
   for (let i = 1; i <= Math.ceil(yellow / 2); i++) {
-    if (yelloWidth == i) break;
-    
+    if (yellow / i < i) break;
+      
     if (yellow % i == 0) {
-      yelloWidth = yellow / i;
-      yellowSizeArray.push([yelloWidth, i]);
+      yellowSizeArray.push([yellow / i, i]);
     } 
   }
   
