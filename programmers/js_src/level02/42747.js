@@ -1,14 +1,12 @@
 // H-Index
 function solution(citations) {
   var answer = 0;
-  let count = Math.max(...citations);
+  let count = citations.length;
   
   while (count) {
     if (citations.filter(value => count <= value).length >= count) {
-      if (citations.filter(value => count > value).length <= count) {
-        answer = count;
-        break;
-      }
+      answer = count;
+      break;
     }
     
     count--;
