@@ -12,7 +12,7 @@ function solution(n) {
 }
 
 // 다른 풀이
-function solution(n) {
-  var half = Math.floor(n / 2);
-  return half * (half + 1);
-}
+// function solution(n) {
+//   var half = Math.floor(n / 2);
+//   return half * (half + 1);
+// }
