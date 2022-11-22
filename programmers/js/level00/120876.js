@@ -1,4 +1,18 @@
 // 겹치는 선분의 길이
+function solution(lines) {
+  var answer = 0;
+  const overlap = {};
+
+  lines.forEach(line => {
+    for (let i = line[0]; i < line[1]; i++) {
+      overlap[i] = overlap[i] ? overlap[i] += 1 : 1;
+    }
+  });
+
+  answer = Object.values(overlap).filter(val => val > 1).length;
+
+  return answer;
+}
 
 // 실패
 // function solution(lines) {
