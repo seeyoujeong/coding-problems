@@ -23,3 +23,28 @@ const getPermutations = (arr, num) => {
 getPermutations(array, m).forEach(result => {
   console.log(result.join(' '));
 });
+
+// 다른 풀이
+// const state = new Array(n + 1).fill(false);
+// let output = "";
+// let pool = [];
+
+// function search(deps, n, m) {
+//   if (deps === m) {
+//     output += pool.join(' ') + '\n';
+//     return;
+//   }
+
+//   for(let i = 1; i <= n; i++){
+//     if (!state[i]) {
+//       state[i] = true;
+//       pool.push(i);
+//       search(deps + 1, n, m);
+//       pool.pop();
+//       state[i] = false;
+//     }
+//   }
+// }
+
+// search(0, n, m);
+// console.log(output);
