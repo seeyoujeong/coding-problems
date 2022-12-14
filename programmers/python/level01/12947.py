@@ -1,5 +1,4 @@
 # 하샤드 수
-
 def solution(x):
     answer = True
     numList = list(map(int, str(x)))
