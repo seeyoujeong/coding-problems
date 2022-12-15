@@ -1,13 +1,10 @@
 // 분수의 덧셈
 function solution(denum1, num1, denum2, num2) {
-  var answer = [];
   let resultNum = num1 * num2;
   let resultDenum = denum1 * num2 + denum2 * num1;
   let resultGcd = gcd(resultNum, resultDenum);
 
-  answer = [resultDenum / resultGcd, resultNum / resultGcd];
-
-  return answer;
+  return [resultDenum / resultGcd, resultNum / resultGcd];
 }
 
 function gcd(a, b) {
