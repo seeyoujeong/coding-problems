@@ -1,6 +1,6 @@
 // 옷가게 할인 받기
 function solution(price) {
-  var answer = 0;
+  let answer = 0;
 
   if (price >= 500000) {
     answer = price - price * 0.2;
