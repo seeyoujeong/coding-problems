@@ -1,14 +1,22 @@
 // 짝수 홀수 개수
 function solution(num_list) {
-  var answer = [0, 0];
+  let odd = 0;
+  let even = 0;
   
   num_list.forEach(num => {
-    if (num % 2 == 0) {
-      answer[0]++;
-    } else {
-      answer[1]++;
-    }
+    num % 2 === 0 ? even++ : odd++;
   });
   
-  return answer;
+  return [even, odd];
 }
+
+// 다른 풀이
+// function solution(num_list) {
+//   var answer = [0, 0];
+
+//   for(let a of num_list){
+//     answer[a % 2] += 1;
+//   }
+
+//   return answer;
+// }
