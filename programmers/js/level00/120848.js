@@ -1,6 +1,6 @@
 // 팩토리얼
 function solution(n) {
-  var answer = 0;
+  let answer = 0;
   const fac = (num) => {
     let result = 1;
 
@@ -11,10 +11,8 @@ function solution(n) {
     return result;
   };
 
-  for (let i = 1; i < 11; i++) {
-    if (n >= fac(i)) {
-      answer = i;
-    }
+  for (let i = 1; fac(i) <= n; i++) {
+    answer = i;
   }
 
   return answer;

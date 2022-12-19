@@ -1,11 +1,6 @@
 // 공 던지기
 function solution(numbers, k) {
-  var answer = 0;
-  const numbersArr = new Array(k).fill(numbers).flat();
-
-  answer = numbersArr[2 * (k - 1)];
-
-  return answer;
+  return Array(k).fill(numbers).flat()[2 * (k - 1)];
 }
 
 // 다른 풀이

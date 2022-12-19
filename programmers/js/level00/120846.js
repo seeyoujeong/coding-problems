@@ -1,6 +1,6 @@
 // 합성수 찾기
 function solution(n) {
-  var answer = 0;
+  let answer = 0;
 
   for (let i = 1; i <= n; i++) {
     let count = 0;
