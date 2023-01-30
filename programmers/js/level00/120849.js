@@ -1,8 +1,4 @@
 // 모음 제거
 function solution(my_string) {
-  var answer = '';
-
-  answer = my_string.replace(/[aeiou]/g, '');
-
-  return answer;
+  return my_string.replace(/[aeiou]/g, '');
 }
