@@ -1,11 +1,8 @@
 // 배열의 유사도
 function solution(s1, s2) {
-  var answer = 0;
   const set = new Set([...s1, ...s2]);
-
-  answer = s1.length + s2.length - set.size;
-
-  return answer;
+    
+  return s1.length + s2.length - set.size;
 }
 
 // 다른 풀이

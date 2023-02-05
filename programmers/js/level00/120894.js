@@ -1,14 +1,9 @@
 // 영어가 싫어요
 function solution(numbers) {
-  var answer = numbers;
-  const numberArr = ["zero", "one", "two", "three", "four", 
-                     "five", "six", "seven", "eight", "nine"];
-
-  numberArr.forEach((num, index) => {
-    answer = answer.split(num).join(index);
-  });
-
-  return +answer;
+  const numArr = ["zero", "one", "two", "three", "four", 
+                  "five", "six", "seven", "eight", "nine"];
+  return +numArr
+    .reduce((acc, cur) => acc.split(cur).join(numArr.indexOf(cur)), numbers);
 }
 
 // 다른 풀이

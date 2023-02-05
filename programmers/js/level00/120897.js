@@ -1,12 +1,7 @@
 // 약수 구하기
 function solution(n) {
-  var answer = [];
-
-  for (let i = 1; i <= n; i++) {
-    if (n % i == 0) {
-      answer.push(i);
-    }
-  }
-
-  return answer;
+  return Array(n)
+    .fill(0)
+    .map((_, i) => i + 1)
+    .filter(num => n % num === 0);
 }
