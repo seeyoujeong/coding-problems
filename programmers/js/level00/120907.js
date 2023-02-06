@@ -1,16 +1,5 @@
 // OX퀴즈
-function solution(quiz) {
-  var answer = [];
-
-  quiz.forEach(q => {
-    const tmp = q.split(' = ');
-
-    if (eval(tmp[0]) == tmp[1]) {
-      answer.push('O');
-    } else {
-      answer.push('X');
-    }
-  });
-
-  return answer;
+function solution(quiz) {    
+  return quiz.map(q => 
+    eval(q.split(' = ')[0]) == q.split(' = ')[1] ? 'O' : 'X');
 }

@@ -1,8 +1,4 @@
 // 문자열안에 문자열
 function solution(str1, str2) {
-  var answer = 0;
-  
-  answer = str1.includes(str2) ? 1 : 2;
-  
-  return answer;
+  return str1.includes(str2) ? 1 : 2;
 }
