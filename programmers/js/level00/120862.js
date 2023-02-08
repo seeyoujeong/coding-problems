@@ -1,17 +1,9 @@
 // 최댓값 만들기 (2)
 function solution(numbers) {
-  var answer = 0;
-  const arr = [];
-
-  for (let i = 0; i < numbers.length; i++) {
-    for (let j = i + 1; j < numbers.length; j++) {
-      arr.push(numbers[i] * numbers[j]);
-    }
-  }
-
-  answer = Math.max(...arr);
-
-  return answer;
+  return numbers
+    .map((num, idx) => numbers.slice(idx + 1).map(v => num * v))
+    .flat()
+    .sort((a, b) => b - a)[0];
 }
 
 // 다른 풀이

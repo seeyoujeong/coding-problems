@@ -1,6 +1,6 @@
 // 직사각형 넓이 구하기
 function solution(dots) {
-  var answer = 1;
+  let answer = 1;
 
   for (let i = 0; i <= 1; i++) {
     dots.sort((a, b) => a[i] - b[i]);
