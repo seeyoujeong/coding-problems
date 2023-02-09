@@ -1,13 +1,8 @@
 // 숨어있는 숫자의 덧셈 (2)
 function solution(my_string) {
-  var answer = 0;
   const nums = my_string.match(/\d+/g);
-
-  if (nums) {
-    answer = nums.reduce((acc, cur) => +acc + +cur, 0);
-  }
-
-  return answer;
+    
+  return nums ? nums.reduce((acc, cur) => acc + +cur, 0) : 0;
 }
 
 // 다른 풀이
