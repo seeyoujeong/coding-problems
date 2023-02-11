@@ -1,22 +1,11 @@
 // 로그인 성공?
 function solution(id_pw, db) {
-  var answer = '';
   const [inputId, inputPw] = id_pw;
-
-  for (let data of db) {
-    const [id, pw] = data;
-    if (id === inputId && pw === inputPw) {
-      answer = 'login';
-      break;
-    } else if (id === inputId && pw !== inputPw) {
-      answer = 'wrong pw';
-      break;
-    } else {
-      answer = 'fail';
-    }
-  }
-
-  return answer;
+  db = new Map(db);
+  
+  return db.has(inputId) ? 
+    (db.get(inputId) === inputPw ? 'login' : 'wrong pw') :
+    'fail';
 }
 
 // 다른 풀이
