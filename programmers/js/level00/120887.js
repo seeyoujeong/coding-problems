@@ -1,10 +1,10 @@
 // k의 개수
 function solution(i, j, k) {
-  var answer = 0;
-
+  let numbers = '';
+  
   for (let x = i; x <= j; x++) {
-    answer += String(x).split('').filter(v => v == k).length;
+    numbers += String(x);
   }
-
-  return answer;
+  
+  return [...numbers].filter(v => v == k).length;
 }

@@ -1,12 +1,12 @@
 // 치킨 쿠폰
 function solution(chicken) {
-  var answer = 0;
-
+  let answer = 0;
+  
   while (chicken >= 10) {
-    const tmp = parseInt(chicken / 10);
-    answer += tmp;
-    chicken = tmp + (chicken % 10);
+    const serviceChicken = parseInt(chicken / 10);
+    answer += serviceChicken;
+    chicken = serviceChicken + (chicken % 10);
   }
-
+  
   return answer;
 }
