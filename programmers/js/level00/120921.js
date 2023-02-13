@@ -1,21 +1,17 @@
 // 문자열 밀기
 function solution(A, B) {
-  var answer = 0;
-
+  let count = 0;
+  
   for (let i = 0; i < A.length; i++) {
     if (A === B) {
-      break;
+      return count;
     }
-
-    A = A.slice(-1) + A.slice(0, -1);
-    answer++;
+    
+    A = A.at(-1) + A.slice(0, -1);
+    count++;
   }
-
-  if (A !== B) {
-    answer = -1;
-  }
-
-  return answer;
+  
+  return -1;
 }
 
 // 다른 풀이
