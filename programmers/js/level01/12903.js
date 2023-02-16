@@ -1,10 +1,8 @@
 // 가운데 글자 가져오기
 function solution(s) {
-  var answer = '';
-
-  answer = s.length % 2 == 0 ? 
-    s.slice(s.length / 2 - 1, s.length / 2 + 1) : 
-    s.slice(s.length / 2, s.length / 2 + 1);
-
-  return answer;
+  const lenDiv2 = Math.floor(s.length / 2);
+  
+  return s.length % 2 === 0 ? 
+    s.slice(lenDiv2 - 1, lenDiv2 + 1) : 
+    s.at(lenDiv2);
 }
