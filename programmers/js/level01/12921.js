@@ -1,27 +1,16 @@
 // 소수 찾기
 function solution(n) {
-  var answer = 0;
-
-  for (let i = 1; i <= n; i++) {
-    if (isPrime(i)) {
-      answer++;
-    }
-  }
-
-  return answer;
-}
-
-function isPrime(num) {
-  if (num == 1) {
-    return false;
-  } else {
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-      if (num % i == 0) {
-        return false;
+  const primeArr = Array(n + 1).fill(true);
+  
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (primeArr[i] === true) {
+      for (let j = i + i; j <= n; j += i) {
+        primeArr[j] = false;
       }
     }
-    return true;
   }
+  
+  return primeArr.filter(v => v).length - 2;
 }
 
 // 다른 풀이
@@ -42,5 +31,6 @@ function isPrime(num) {
 //       }
 //     }
 //   }
+
 //   return s.size;
 // }

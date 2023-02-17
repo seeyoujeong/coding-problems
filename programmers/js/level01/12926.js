@@ -1,20 +1,20 @@
 // 시저 암호
 function solution(s, n) {
-  var answer = '';
-
-  answer = s.split(' ').map(i => {
-    return i.split('').map(j => {
-      if (j.codePointAt(0) + n > 'z'.codePointAt(0)) {
-        return String.fromCodePoint(
-          'a'.codePointAt(0) + j.codePointAt(0) + n - 'z'.codePointAt(0) - 1);
-      } else if (j.codePointAt(0) <= 'Z'.codePointAt(0) && 
-                  j.codePointAt(0) + n > 'Z'.codePointAt(0)) {
-        return String.fromCodePoint(
-          'A'.codePointAt(0) + j.codePointAt(0) + n - 'Z'.codePointAt(0) - 1);
+  const utf16 = char => char.codePointAt(0);
+  const zCode = utf16('z');
+  const ZCode = utf16('Z');
+    
+  return s.split(' ').map(i => {
+    return [...i].map(j => {
+      const charCode = utf16(j);
+        
+      if (charCode + n > zCode) {
+        return String.fromCodePoint(utf16('a') + charCode + n - zCode - 1);
+      } else if (charCode <= ZCode && charCode + n > ZCode) {
+        return String.fromCodePoint(utf16('A') + charCode + n - ZCode - 1);
       }
-      return String.fromCodePoint(j.codePointAt(0) + n);
+        
+      return String.fromCodePoint(utf16(j) + n);
     }).join('');
   }).join(' ');
-
-  return answer;
 }
