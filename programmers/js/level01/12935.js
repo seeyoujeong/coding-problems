@@ -1,18 +1,9 @@
 // 제일 작은 수 제거하기
 function solution(arr) {
-  var answer = [];
-
-  if (arr.length == 1) {
-    answer.push(-1);
-  }
-
-  for (let i of arr) {
-    if (i != Math.min(...arr)) {
-      answer.push(i);
-    }
-  }
-
-  return answer;
+  const min = Math.min(...arr);
+  const result = arr.filter(num => num !== min);
+  
+  return result.length ? result : [-1];
 }
 
 // 다른 풀이
