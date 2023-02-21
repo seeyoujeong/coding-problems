@@ -1,22 +1,13 @@
 // 실패율
 function solution(N, stages) {
-  var answer = [];
-  const failureRate = {};
-
-  for (let i = 1; i <= N; i++) {
-    let f = stages.filter(stage => i == stage).length;
-    let c = stages.filter(stage => i <= stage).length;
-
-    failureRate[i] = f / c;
-  }
-
-  answer = Object.entries(failureRate);
-
-  answer.sort((a, b) => b[1] - a[1]);
-
-  answer = answer.map(a => +a[0]);
-
-  return answer;
+  return Array(N)
+    .fill(0)
+    .map((_, idx) => 
+      [idx + 1, 
+      stages.filter(stage => idx + 1 === stage).length / 
+      stages.filter(stage => stage >= idx + 1).length])
+    .sort((a, b) => b[1] - a[1])
+    .map(arr => arr[0]);
 }
 
 // 다른 풀이
