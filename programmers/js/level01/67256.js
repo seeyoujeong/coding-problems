@@ -1,33 +1,25 @@
-// 키패드 누르기
 function solution(numbers, hand) {
-  var answer = '';
+  let answer = '';
   const leftHand = {
-    main: false,
+    main: hand === 'left' ? true : false,
     number: 10
   };
   const rightHand = {
-    main: false,
+    main: hand === 'right' ? true : false,
     number: 12
   };
-  const location = num => [Math.floor((num - 1) / 3), (num - 1) % 3];  
-  const distance = (loc1, loc2) => Math.abs(loc1[0] - loc2[0]) + Math.abs(loc1[1] - loc2[1]);
 
-  if (hand == 'left') {
-    leftHand.main = true;
-  } else {
-    rightHand.main = true;
-  }
-
-  numbers = numbers.map(num => num ? num : 11);
+  numbers = numbers.map(num => num === 0 ? 11 : num);
 
   for (let num of numbers) {
-    if (num == 1 || num == 4 || num == 7) {
+    if (num === 1 || num === 4 || num === 7) {
       answer += 'L';
       leftHand.number = num;
-    } else if (num == 3 || num == 6 || num == 9) {
+    } else if (num === 3 || num === 6 || num === 9) {
       answer += 'R';
       rightHand.number = num;
-    } else if (distance(location(num), location(leftHand.number)) == distance(location(num), location(rightHand.number))) {
+    } else if (distance(location(num), location(leftHand.number)) === 
+               distance(location(num), location(rightHand.number))) {
       if (leftHand.main) {
         answer += 'L';
         leftHand.number = num;
@@ -35,7 +27,8 @@ function solution(numbers, hand) {
         answer += 'R';
         rightHand.number = num;
       }
-    } else if (distance(location(num), location(leftHand.number)) < distance(location(num), location(rightHand.number))) {
+    } else if (distance(location(num), location(leftHand.number)) < 
+               distance(location(num), location(rightHand.number))) {
       answer += 'L';
       leftHand.number = num;
     } else {
@@ -45,6 +38,14 @@ function solution(numbers, hand) {
   }
 
   return answer;
+}
+
+function location(num) {
+  return [Math.floor((num - 1) / 3), (num - 1) % 3];
+}
+
+function distance(loc1, loc2) {
+  return Math.abs(loc1[0] - loc2[0]) + Math.abs(loc1[1] - loc2[1]);
 }
 
 // 다른 풀이
