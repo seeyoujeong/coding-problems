@@ -1,30 +1,15 @@
 // 로또의 최고 순위와 최저 순위
 function solution(lottos, win_nums) {
-  var answer = [];
   let count0 = 0;
   let countWinNums = 0;
-
-  for (let num of lottos) {
-    if (num == 0) {
-      count0++;
-    }
-
-    if (win_nums.includes(num)) {
-      countWinNums++;
-    }
-  }
-
-  if (countWinNums == 0) {
-    if (count0 == 0) {
-      answer = [6, 6];
-    } else {
-      answer = [1, 6];
-    }
-  } else {
-    answer = [7 - countWinNums - count0, 7 - countWinNums];
-  }
-
-  return answer;
+  
+  lottos.forEach(num => num ? 
+    win_nums.includes(num) && countWinNums++ : count0++
+  );
+  
+  return countWinNums ? 
+    [7 - countWinNums - count0, 7 - countWinNums] : 
+    count0 ? [1, 6] : [6, 6];
 }
 
 // 다른 풀이
