@@ -1,15 +1,7 @@
 // 숫자 문자열과 영단어
 function solution(s) {
-  var answer = 0;
-  const engNum = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-
-  for (let i = 0; i <= 9; i++) {
-    s = s.replace(new RegExp(engNum[i], "g"), i);
-  }
-
-  answer = +s;
-
-  return answer;
+  return +['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    .reduce((acc, cur, idx) => acc.replace(new RegExp(cur, "g"), idx), s);
 }
 
 // 다른 풀이

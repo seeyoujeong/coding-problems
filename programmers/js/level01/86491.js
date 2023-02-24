@@ -1,17 +1,14 @@
 // 최소직사각형
 function solution(sizes) {
-  var answer = 0;
-  var maxSize = [];
-  var minSize = [];
-
+  const maxSize = [];
+  const minSize = [];
+  
   for (let size of sizes) {
     maxSize.push(Math.max(...size));
     minSize.push(Math.min(...size));
   }
-
-  answer = Math.max(...maxSize) * Math.max(...minSize);
-
-  return answer;
+  
+  return Math.max(...maxSize) * Math.max(...minSize);
 }
 
 // 다른 풀이
