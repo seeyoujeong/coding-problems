@@ -1,6 +1,6 @@
 // 성격 유형 검사하기
 function solution(survey, choices) {
-  var answer = '';
+  let answer = '';
   const category = {
       R: 0,
       T: 0,
@@ -9,8 +9,8 @@ function solution(survey, choices) {
       J: 0,
       M: 0,
       A: 0,
-      N: 0
-  }
+      N: 0,
+  };
 
   for (let i = 0; i < choices.length; i++) {
     if (choices[i] < 4) {
@@ -21,29 +21,12 @@ function solution(survey, choices) {
       category[survey[i][1]] += choices[i] - 4;
     }
   }
+    
+  const categoryKeys = Object.keys(category);
 
-  if (category.R >= category.T) {
-    answer += 'R';
-  } else {
-    answer += 'T';
-  }
-
-  if (category.C >= category.F) {
-    answer += 'C';
-  } else {
-    answer += 'F';
-  }
-
-  if (category.J >= category.M) {
-    answer += 'J';
-  } else {
-    answer += 'M';
-  }
-
-  if (category.A >= category.N) {
-    answer += 'A';
-  } else {
-    answer += 'N';
+  for (let i = 1; i < categoryKeys.length; i += 2) {
+    const [key1, key2] = [categoryKeys[i - 1], categoryKeys[i]];
+    answer += category[key1] >= category[key2] ? key1 : key2;
   }
 
   return answer;

@@ -1,32 +1,20 @@
 // 신고 결과 받기
 function solution(id_list, report, k) {
-  var answer = [];
-  const reportSet = [...new Set(report)];
-  const reportedCount = {};
-  const reportedBy = {};
-  const mailCount = {};
+  const reportedBy = id_list.reduce((acc, cur) => ({...acc, [cur]: []}), {});
+  const mailCount = id_list.reduce((acc, cur) => ({...acc, [cur]: 0}), {});
 
-  id_list.forEach(id => {
-    reportedCount[id] = 0;
-    reportedBy[id] = [];
-    mailCount[id] = 0;
+  [...new Set(report)].forEach(elem => {
+    const [id, reportedId] = elem.split(' ');
+    reportedBy[reportedId].push(id);
   });
 
-  reportSet.forEach(elem => {
-    elem = elem.split(' ');
-    reportedCount[elem[1]]++;
-    reportedBy[elem[1]].push(elem[0]);
-  });
-
-  for (let id in reportedCount) {
-    if (reportedCount[id] >= k) {
+  for (const id in reportedBy) {
+    if (reportedBy[id].length >= k) {
       reportedBy[id].forEach(id => mailCount[id]++);
     }
   }
 
-  answer = Object.values(mailCount);
-
-  return answer;
+  return Object.values(mailCount);
 }
 
 // 효율↓
