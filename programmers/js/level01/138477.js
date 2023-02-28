@@ -1,18 +1,15 @@
 // 명예의 전당 (1)
 function solution(k, score) {
-  var answer = [];
-  const tmp = [];
-
-  score.forEach(s => {
-    tmp.push(s);
-    tmp.sort((a, b) => b - a);
-
-    if (tmp.length > k) {
-      tmp.pop();
+  const hof = [];
+  
+  return score.map(s => {
+    hof.push(s);
+    hof.sort((a, b) => b - a);
+    
+    if (hof.length > k) {
+      hof.pop();
     }
-
-    answer.push(tmp.at(-1));
+    
+    return hof.at(-1);
   });
-
-  return answer;
 }
