@@ -8,7 +8,7 @@ function solution(keymap, targets) {
     
     for (const char of target) {
       if (!(char in countKeyObj)) {
-        answer.push(-1);
+        count = -1;
         break;
       }
       

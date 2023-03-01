@@ -1,6 +1,6 @@
 // 카드 뭉치
 function solution(cards1, cards2, goal) {
-  for (let card of goal) {
+  for (const card of goal) {
     if (cards1[0] === card) {
       cards1.shift();
     } else if (cards2[0] === card) {
