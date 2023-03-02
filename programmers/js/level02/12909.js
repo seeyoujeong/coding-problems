@@ -1,52 +1,15 @@
 // 올바른 괄호
 function solution(s) {
-  var answer = true;
   let count = 0;
 
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === '(') count++;
-    if (s[i] === ')') count--;
-    if (count < 0) break;
+  for (const parenthesis of s) {
+    parenthesis === '(' ? count++ : count--;
+    
+    if (count < 0) return false;
   }
 
-  answer = count ? false : true;
-
-  return answer;
+  return count === 0;
 }
-
-// 효율↓
-// function solution(s) {
-//   var answer = true;
-
-//   while (s.length) {
-//     let tmp = s.replace(/(\(\))/, '');
-    
-//     if (s == tmp) break;
-    
-//     s = tmp
-//   }
-  
-//   answer = s.length == 0 ? true : false;
-
-//   return answer;
-// }
-
-// function solution(s) {
-//   var answer = true;
-
-//   s = s.split('');
-    
-//   for (let i = 0; i < s.length; i++) {
-//     if (s[i] + s[i + 1] == '()') {
-//       s.splice(i, 2);
-//       i = -1;
-//     }
-//   }
-    
-//   answer = s.length == 0 ? true : false;
-
-//   return answer;
-// }
 
 // function solution(s) {
 //   var answer = true;
