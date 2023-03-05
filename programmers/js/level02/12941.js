@@ -1,27 +1,7 @@
 // 최솟값 만들기
-function solution(A, B){
-  var answer = 0;
-
+function solution(A,B){
   A.sort((a, b) => a - b);
   B.sort((a, b) => b - a);
-
-  for (let i = 0; i < A.length; i++) {
-    answer += A[i] * B[i];
-  }
-
-  return answer;
+  
+  return A.reduce((acc, cur, idx) => acc + cur * B[idx], 0);
 }
-
-// 효율↓
-// function solution(A, B){
-//   var answer = 0;
-
-//   while (A.length) {
-//       answer += Math.max(...A) * Math.min(...B);
-
-//       A.splice(A.indexOf(Math.max(...A)), 1);
-//       B.splice(B.indexOf(Math.min(...B)), 1);
-//   }
-
-//   return answer;
-// }

@@ -1,16 +1,11 @@
 // 피보나치 수
 function solution(n) {
-  var answer = 0;
-  let d = Array(n).fill(0);
-  
-  d[0] = 0;
-  d[1] = 1;
+  const d = [0, 1, ...Array(n - 1).fill(0)];
+  const mod1234567 = (num) => num % 1234567;
   
   for (let i = 2; i <= n; i++) {
-    d[i] = (d[i - 1] % 1234567) + (d[i - 2] % 1234567); 
+    d[i] = mod1234567(d[i - 1]) + mod1234567(d[i - 2]); 
   }
   
-  answer = d[n] % 1234567;
-  
-  return answer;
+  return mod1234567(d[n]);
 }

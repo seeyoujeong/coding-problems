@@ -1,17 +1,17 @@
 // 이진 변환 반복하기
 function solution(s) {
-  var answer = [0, 0];
-
+  const answer = [0, 0];
+  
   while (s != 1) {
-    let len = s.length;
-    let removelen = s.split('0').join('').length;
-
+    const len = s.length;
+    const removelen = s.split('0').join('').length;
+    
     s = removelen.toString(2);
-
+    
     answer[0]++;
     answer[1] += len - removelen;
   }
-
+  
   return answer;
 }
 
