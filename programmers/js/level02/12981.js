@@ -1,22 +1,16 @@
 // 영어 끝말잇기
 function solution(n, words) {
-  var answer = [];
+  let num = 0;
 
   for (let i = 1; i < words.length; i++) {
-    let result = [i % n + 1, Math.floor(i / n) + 1];
-
-    if (words[i - 1].slice(-1) != words[i].slice(0, 1)) {
-      answer = result;
+    if (words[i - 1].at(-1) !== words[i][0] ||
+        words.slice(0, i).includes(words[i])) {
+      num = i;
       break;
-    } else if (words.slice(0, i).includes(words[i])) {
-      answer = result;
-      break;
-    } else {
-      answer = [0, 0];
     }
   }
 
-  return answer;
+  return num ? [num % n + 1, Math.floor(num / n) + 1] : [0, 0];
 }
 
 // 다른 풀이
