@@ -1,10 +1,6 @@
 // N개의 최소공배수
 function solution(arr) {
-  var answer = 0;
-  
-  answer = arr.reduce((a, b) => lcm(a, b), 1);
-  
-  return answer;
+  return arr.reduce((acc, cur) => lcm(acc, cur), 1);
 }
 
 function gcd(n, m) {
