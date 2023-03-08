@@ -1,25 +1,15 @@
 // 구명보트
 function solution(people, limit) {
-  var answer = 0;
-
+  let answer = 0;
   people.sort((a, b) => a - b);
   
   while (people.length) {
-    if (people.length == 1) {
-      answer++;
-      break;
-    }
-    
     if (people[0] + people.at(-1) <= limit) {
-      answer++;
       people.shift();
-      people.pop();
     }
     
-    if (people[0] + people.at(-1) > limit) {
-      answer++;
-      people.pop();
-    }
+    people.pop();
+    answer++;
   }
   
   return answer;

@@ -1,22 +1,18 @@
 // 멀리 뛰기
 function solution(n) {
-  var answer = 0;
+  if (n < 3) return n;
+  
   let a = 1;
   let b = 2;
   let c = a + b;
   
-  if (n == 1) return 1;
-  if (n == 2) return 2;
-  
   for (let i = 3; i < n; i++) {
-    a = b % 1234567;
+    a = b;
     b = c % 1234567;
     c = a + b;
   }
   
-  answer = c % 1234567;
-  
-  return answer;
+  return c % 1234567;
 }
 
 // 다른 풀이

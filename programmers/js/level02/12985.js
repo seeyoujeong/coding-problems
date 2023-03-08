@@ -1,6 +1,6 @@
 // 예상 대진표
 function solution(n, a, b) {
-  var answer = 0;
+  let answer = 0;
 
   while (a !== b) {
     answer++;
