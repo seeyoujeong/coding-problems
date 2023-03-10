@@ -1,24 +1,18 @@
 // H-Index
 function solution(citations) {
-  var answer = 0;
-  let count = citations.length;
+  let hIndex = citations.length;
   
-  while (count) {
-    if (citations.filter(value => count <= value).length >= count) {
-      answer = count;
-      break;
-    }
-    
-    count--;
+  while (citations.filter(num => hIndex <= num).length < hIndex) {
+    hIndex--;
   }
   
-  return answer;
+  return hIndex;
 }
 
 // 다른 풀이
 // function solution(citations) {
-//   var answer = 0;
-//   citations = citations.sort((a, b) => b - a);
+//   let answer = 0;
+//   citations.sort((a, b) => b - a);
   
 //   while (answer + 1 <= citations[answer]) {
 //     answer++;
