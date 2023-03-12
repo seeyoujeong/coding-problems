@@ -1,24 +1,22 @@
 // 괄호 회전하기
 function solution(s) {
-  var answer = 0;
+  let answer = 0;
   const brakets = ['[]', '()', '{}'];
   
   for (let x = 0; x < s.length; x++) {
-    const sArr = (s.slice(x) + s.slice(0, x)).split('');
-    const tmp = [];
-    
-    sArr.forEach(val => {
-      tmp.push(val);
+    const sArr = [...s.slice(x), ...s.slice(0, x)];
+    const braketStack = sArr.reduce((acc, cur) => {
+      acc.push(cur);
       
-      if (tmp.length > 1) {
-        if (brakets.includes(tmp.at(-2) + tmp.at(-1))) {
-          tmp.pop();
-          tmp.pop();
-        }
+      if (brakets.includes(acc.at(-2) + acc.at(-1))) {
+        acc.pop();
+        acc.pop();
       }
-    });
       
-    if (tmp.length === 0) {
+      return acc;
+    }, []);
+      
+    if (braketStack.length === 0) {
       answer++;
     }
   }
@@ -54,25 +52,5 @@ function solution(s) {
 //     if (flag) answer++;
 //   }
 
-//   return answer;
-// }
-
-// 실패
-// function solution(s) {
-//   var answer = 0;
-//   const checkParentheses = /\(([\(\)\{\}\[\]])*\)/;
-//   const checkBraces = /\{([\(\)\{\}\[\]])*\}/;
-//   const checkBrakets = /\[([\(\)\{\}\[\]])*\]/;
-  
-//   for (let i = 0; i < s.length; i++) {
-//     if (checkParentheses.test(s) && 
-//       checkBraces.test(s) && 
-//       checkBrakets.test(s)) {
-//       answer++;
-//     }
-    
-//     s = s.slice(1) + s[0];
-//   }
-  
 //   return answer;
 // }
