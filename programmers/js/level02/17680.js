@@ -1,13 +1,13 @@
 // [1차] 캐시
 function solution(cacheSize, cities) {
-  var answer = 0;
-  let cache = [];
+  let runtime = 0;
+  const cache = [];
   
   if (cacheSize == 0) {
-      return cities.length * 5;
+    return cities.length * 5;
   }
   
-  let citiesPriorities = cities.map(city => {
+  const citiesPriorities = cities.map(city => {
     return {
       name: city,
       priority: 0
@@ -15,26 +15,27 @@ function solution(cacheSize, cities) {
   });
   
   while (citiesPriorities.length) {
-    let cityPriority = citiesPriorities.shift();
-    const compareName = cacheData => cacheData.name.toLowerCase() == cityPriority.name.toLowerCase();
+    const cityPriority = citiesPriorities.shift();
+    const compareName = cacheData => 
+      cacheData.name.toLowerCase() === cityPriority.name.toLowerCase();
     
     if (cache.some(compareName)) {
-      answer += 1;
+      runtime += 1;
       cache[cache.findIndex(compareName)].priority = 0;
     } else if (cache.length == cacheSize) {
-      answer += 5;
+      runtime += 5;
       cache.sort((a, b) => a.priority - b.priority);
       cache.pop();
       cache.push(cityPriority);
     } else {
-      answer += 5;
+      runtime += 5;
       cache.push(cityPriority);
     }
     
     cache.forEach(cacheData => cacheData.priority++);
   }
   
-  return answer;
+  return runtime;
 }
 
 // 다른 풀이
