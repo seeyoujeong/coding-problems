@@ -1,28 +1,23 @@
 // 행렬의 곱셈
 function solution(arr1, arr2) {
-  var answer = [];
-  let result = [];
-
-  for (let i = 0; i < arr2[0].length; i++) {
-    let arr = []
-    for (let j = 0; j < arr1.length; j++) {
-      let tmp = 0;
-      for (let k = 0; k < arr1[0].length; k++) {
-        tmp += arr1[j][k] * arr2[k][i];
+  const answer = [];  
+    
+  for (const row of arr1) {
+    const arr = [];
+    
+    for (let i = 0; i < arr2[0].length; i++) {
+      let tmp = 0; 
+      
+      for (let j = 0; j < row.length; j++) {
+        tmp += row[j] * arr2[j][i];    
       }
+      
       arr.push(tmp);
     }
-    result.push(arr);
-  }
-
-  for (let i = 0; i < result[0].length; i++) {
-    let arr = [];
-    for (let j = 0; j < result.length; j++) {
-      arr.push(result[j][i]);
-    }
+    
     answer.push(arr);
   }
-
+    
   return answer;
 }
 
