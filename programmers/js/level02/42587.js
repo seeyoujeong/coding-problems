@@ -1,54 +1,20 @@
 // 프린터
 function solution(priorities, location) {
-  var answer = 0;
-  let arr = [];
-  let result = [];
+  const result = [];
+  const waitingList = priorities.map((priority, idx) => ({
+    location: idx,
+    priority,
+  }));
 
-  for (let i = 0; i < priorities.length; i++) {
-    let obj = {
-      location: i,
-      priority: priorities[i],
-    };
+  while (waitingList.length > 0) {
+    const firstDoc = waitingList.shift();
 
-    arr.push(obj);
-  }
-
-  while (arr.length) {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[0].priority < arr[i].priority) {
-        arr.push(arr.shift());
-        i = 0;
-      } 
+    if (waitingList.some((doc) => firstDoc.priority < doc.priority)) {
+      waitingList.push(firstDoc);
+    } else {
+      result.push(firstDoc);
     }
-
-    result.push(arr.shift());
   }
 
-  answer = result.indexOf(result.find(elem => elem.location == location)) + 1;
-
-  return answer;
+  return result.findIndex((doc) => doc.location === location) + 1;
 }
-
-// 다른 풀이
-// function solution(priorities, location) {
-//   var arr = priorities.map((priority, index) => {
-//     return {
-//       index: index, priority: priority
-//     };
-//   });
-
-//   var queue = [];
-
-//   while(arr.length > 0) {
-//     var firstEle = arr.shift();
-//     var hasHighPriority = arr.some(ele => ele.priority > firstEle.priority);
-
-//     if (hasHighPriority) {
-//       arr.push(firstEle);
-//     } else {
-//       queue.push(firstEle);
-//     }
-//   }
-
-//   return queue.findIndex(queueEle => queueEle.index === location) + 1;
-// }
