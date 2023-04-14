@@ -1,21 +1,25 @@
 // 타겟 넘버
 function solution(numbers, target) {
-  var answer = 0;
-  const sum = numbers.reduce((acc, cur) => acc + cur, 0);
-  
-  function dfs(numbers, sum) {        
-    for (let i = 0; i < numbers.length; i++) {
-      if (sum - numbers[i] * 2 == target) {
+  let answer = 0;
+
+  function dfs(arr, sum) {
+    for (let i = 0; i < arr.length; i++) {
+      const curSum = sum - arr[i] * 2;
+
+      if (curSum === target) {
         answer++;
       }
-      
-      if (sum - numbers[i] * 2 > target) {
-        dfs(numbers.slice(i + 1), sum - numbers[i] * 2);
+
+      if (curSum > target) {
+        dfs(arr.slice(i + 1), curSum);
       }
     }
   }
-  
-  dfs(numbers, sum);
+
+  dfs(
+    numbers,
+    numbers.reduce((acc, cur) => acc + cur, 0)
+  );
 
   return answer;
 }
@@ -24,18 +28,18 @@ function solution(numbers, target) {
 // function solution(numbers, target) {
 //   let answer = 0;
 
-//   getAnswer(0, 0);
-
-//   function getAnswer(x, value) {
-//     if (x < numbers.length) {
-//       getAnswer(x + 1, value + numbers[x]);
-//       getAnswer(x + 1, value - numbers[x]);
+//   function dfs(idx, sum) {
+//     if (idx < numbers.length) {
+//       dfs(idx + 1, sum + numbers[idx]);
+//       dfs(idx + 1, sum - numbers[idx]);
 //     } else {
-//       if (value === target){
+//       if (sum === target) {
 //         answer++;
 //       }
 //     }
 //   }
+
+//   dfs(0, 0);
 
 //   return answer;
 // }
