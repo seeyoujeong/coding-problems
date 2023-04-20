@@ -46,13 +46,14 @@ function getAllPermutations(arr) {
 // 다른 풀이
 // function solution(k, dungeons) {
 //   let answer = 0;
-//   const visited = new Array(dungeons.length).fill(false);
+//   const dunLen = dungeons.length;
+//   const visited = Array(dunLen).fill(false);
 
 //   function dfs(k, dep) {
-//     answer = Math.max(dep, answer);
+//     answer = Math.max(answer, dep);
 
-//     for (let i = 0; i < dungeons.length; i++) {
-//       if (k >= dungeons[i][0] && !visited[i]) {
+//     for (let i = 0; i < dunLen; i++) {
+//       if (k >= dungeons[i][0] && !visited[i] && dep < dunLen) {
 //         visited[i] = true;
 //         dfs(k - dungeons[i][1], dep + 1);
 //         visited[i] = false;
