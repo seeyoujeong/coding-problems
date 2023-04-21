@@ -1,65 +1,35 @@
 // 주차 요금 계산
 function solution(fees, records) {
-  var answer = [];
-  const parkingState = {};
-  const parkingTime = {};
-  const parkingTotalTime = {};
-  const calcTime = (time1, time2) => (new Date(`1970-01-01 ${time1}`) - new Date(`1970-01-01 ${time2}`)) / 60000;
+  const MAX_TIME = 1439;
+  const parkingRecords = new Map();
 
-  for (let record of records) {
-    let [time, number, state] = record.split(' ');
+  records.forEach((record) => {
+    const [time, carNumber, state] = record.split(" ");
+    const [h, m] = time.split(":");
+    const minute = parseInt(h) * 60 + parseInt(m);
 
-    if (state == 'OUT') {
-      parkingTotalTime[number] = !parkingTotalTime[number] ? 
-        calcTime(time, parkingTime[number]) :
-        parkingTotalTime[number] + calcTime(time, parkingTime[number]);
+    if (!parkingRecords.has(carNumber)) {
+      parkingRecords.set(carNumber, 0);
     }
 
-    parkingTime[number] = time;
-    parkingState[number] = state;
-  }
+    const accumulatedTime = parkingRecords.get(carNumber);
 
-  for (let number in parkingState) {
-    if (parkingState[number] == 'IN') {
-      parkingTotalTime[number] = !parkingTotalTime[number] ? 
-        calcTime('23:59', parkingTime[number]) :
-        parkingTotalTime[number] + calcTime('23:59', parkingTime[number]);
+    if (state === "IN") {
+      parkingRecords.set(carNumber, accumulatedTime + (MAX_TIME - minute));
     }
-  }
 
-  let [primaryTime, primaryFee, perTime, perFee] = fees;
-
-  for (let number of Object.keys(parkingTotalTime).sort((a, b) => a - b)) {
-    if (parkingTotalTime[number] <= primaryTime) {
-      answer.push(primaryFee);
-    } else {
-      answer.push(primaryFee + Math.ceil((parkingTotalTime[number] - primaryTime) / perTime) * perFee);
+    if (state === "OUT") {
+      parkingRecords.set(carNumber, accumulatedTime - (MAX_TIME - minute));
     }
-  }
+  });
 
-  return answer;
+  const [defaultTime, defaultFee, perTime, perFee] = fees;
+
+  return [...parkingRecords]
+    .sort((a, b) => a[0] - b[0])
+    .map(([_, time]) => {
+      if (defaultTime >= time) return defaultFee;
+
+      return defaultFee + Math.ceil((time - defaultTime) / perTime) * perFee;
+    });
 }
-
-// 다른 풀이
-// function solution(fees, records) {
-//   const parkingTime = {};
-
-//   records.forEach(r => {
-//     let [time, id, type] = r.split(' ');
-//     let [h, m] = time.split(':');
-//     time = (h * 1) * 60 + (m * 1);
-//     if (!parkingTime[id]) parkingTime[id] = 0;
-//     if (type === 'IN') parkingTime[id] += (1439 - time);
-//     if (type === 'OUT') parkingTime[id] -= (1439 - time);
-//   });
-
-//   const answer = [];
-
-//   for (let [car, time] of Object.entries(parkingTime)) {
-//     if (time <= fees[0]) time = fees[1];
-//     else time = Math.ceil((time - fees[0]) / fees[2]) * fees[3] + fees[1]
-//     answer.push([car, time]);
-//   }
-
-//   return answer.sort((a, b) => a[0] - b[0]).map(v => v[1]);
-// }
