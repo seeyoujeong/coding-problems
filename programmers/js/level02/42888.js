@@ -1,36 +1,30 @@
 // 오픈채팅방
 function solution(record) {
-  var answer = [];
-  const userIdMap = new Map();
-  const userStateRecord = [];
+  record = record.map((str) => str.split(" "));
 
-  for (let user of record) {
-    user = user.split(' ');
-    let [state, id, nik] = user;
-
-    if (userIdMap.has(id) && state != 'Leave') {
-      userIdMap.delete(id);
-      userIdMap.set(id, nik);
-      userStateRecord.push({ id: id, state: state });
-    } else if (state == 'Leave') {
-      userStateRecord.push({ id: id, state: state });  
-    } else {
-      userIdMap.set(id, nik);
-      userStateRecord.push({ id: id, state: state });
-    }
-  }
-
-  for (let user of userStateRecord) {
-    if (user.state == 'Enter') {
-      answer.push(`${userIdMap.get(user.id)}님이 들어왔습니다.`);
+  const userMap = record.reduce((acc, [state, id, nik]) => {
+    if (state === "Enter") {
+      acc.set(id, nik);
     }
 
-    if (user.state == 'Leave') {
-      answer.push(`${userIdMap.get(user.id)}님이 나갔습니다.`);
+    if (state === "Change") {
+      acc.set(id, nik);
     }
-  }
 
-  return answer;
+    return acc;
+  }, new Map());
+
+  return record.reduce((acc, [state, id, _]) => {
+    if (state === "Enter") {
+      acc.push(`${userMap.get(id)}님이 들어왔습니다.`);
+    }
+
+    if (state === "Leave") {
+      acc.push(`${userMap.get(id)}님이 나갔습니다.`);
+    }
+
+    return acc;
+  }, []);
 }
 
 // 다른 풀이
@@ -55,6 +49,6 @@ function solution(record) {
 //   });
 
 //   return action.map(([state, uid]) => {
-//     return `${userInfo[uid]}${stateMapping[state]}`;    
+//     return `${userInfo[uid]}${stateMapping[state]}`;
 //   });
 // }
