@@ -1,22 +1,21 @@
 // 스킬트리
 function solution(skill, skill_trees) {
-  var answer = skill_trees.length;
+  return skill_trees.reduce((acc, cur) => {
+    let prevIdx = 0;
 
-  for (let skill_tree of skill_trees) {
-    let tmp = 0;
-    for (let i = 0; i < skill.length; i++) {
-      let index = skill_tree.indexOf(skill[i]);
+    for (let s of skill) {
+      let curIdx = cur.indexOf(s);
 
-      if ((tmp == -1 && index > tmp) || (index != -1 && index < tmp)) {
-        answer--;
+      if (curIdx !== -1 && (prevIdx === -1 || prevIdx > curIdx)) {
+        acc--;
         break;
       }
 
-      tmp = index;
-    }   
-  }
+      prevIdx = curIdx;
+    }
 
-  return answer;
+    return acc;
+  }, skill_trees.length);
 }
 
 // 다른 풀이
@@ -30,20 +29,4 @@ function solution(skill, skill_trees) {
 //         return skill.indexOf(x) === 0 || x === "";
 //     })
 //     .length
-// }
-
-// function solution(skill, skill_trees) {
-//   function isCorrect(n) {
-//     let test = skill.split('');
-
-//     for (var i = 0; i < n.length; i++) {
-//       if (!skill.includes(n[i])) continue;
-//       if (n[i] === test.shift()) continue;
-//       return false;
-//     }
-
-//     return true;
-//   }    
-
-//   return skill_trees.filter(isCorrect).length;
 // }

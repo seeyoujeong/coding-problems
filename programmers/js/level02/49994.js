@@ -1,40 +1,31 @@
 // 방문 길이
 function solution(dirs) {
-  var answer = 0;
-  let record = new Set();
+  const record = new Set();
   let coordinate = [0, 0];
-  const recording = (prCoord, coord) => {
-    record.add(prCoord + coord);
-    record.add(coord + prCoord);
+  const recording = (prevCoord, coord) => {
+    record.add(prevCoord + coord);
+    record.add(coord + prevCoord);
   };
 
   for (let dir of dirs) {
-    let priorCoordinate;
+    let prevCoordinate = coordinate.join("");
 
-    if (dir == 'U') {
-      if (coordinate[1] == 5) continue;
-      priorCoordinate = coordinate.join('');
+    if (dir === "U") {
+      if (coordinate[1] === 5) continue;
       coordinate[1]++;
-      recording(priorCoordinate, coordinate.join(''));
-    } else if (dir == 'D') {
-      if (coordinate[1] == -5) continue;
-      priorCoordinate = coordinate.join('');
+    } else if (dir === "D") {
+      if (coordinate[1] === -5) continue;
       coordinate[1]--;
-      recording(priorCoordinate, coordinate.join(''));
-    } else if (dir == 'R') {
-      if (coordinate[0] == 5) continue;
-      priorCoordinate = coordinate.join('');
+    } else if (dir === "R") {
+      if (coordinate[0] === 5) continue;
       coordinate[0]++;
-      recording(priorCoordinate, coordinate.join(''));
-    } else if (dir == 'L') {
-      if (coordinate[0] == -5) continue;
-      priorCoordinate = coordinate.join('');
+    } else if (dir === "L") {
+      if (coordinate[0] === -5) continue;
       coordinate[0]--;
-      recording(priorCoordinate, coordinate.join(''));
     }
+
+    recording(prevCoordinate, coordinate.join(""));
   }
 
-  answer = record.size / 2;
-
-  return answer;
+  return record.size / 2;
 }
