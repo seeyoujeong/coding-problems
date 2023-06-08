@@ -1,33 +1,26 @@
 // 가장 큰 수
 function solution(numbers) {
-  var answer = '';
   const maxLen = String(Math.max(...numbers)).length;
 
-  numbers.sort((a, b) => {
-    let aa = String(a).repeat(maxLen).slice(0, maxLen);
-    let bb = String(b).repeat(maxLen).slice(0, maxLen);
+  let result = numbers
+    .sort((a, b) => {
+      const aa = String(a).repeat(maxLen).slice(0, maxLen);
+      const bb = String(b).repeat(maxLen).slice(0, maxLen);
 
-    if (bb == aa && aa[0] > aa[1]) return b - a;
+      if (bb === aa && aa[0] > aa[1]) return b - a;
 
-    if (bb == aa && aa[0] < aa[1]) return a - b;
+      if (bb === aa && aa[0] < aa[1]) return a - b;
 
-    return bb - aa;
-  });
+      return bb - aa;
+    })
+    .join("");
 
-  answer = numbers.join('');
-
-  if (+answer === 0) answer = '0';
-
-  return answer;
+  return result[0] === "0" ? "0" : result;
 }
 
 // 다른 풀이
 // function solution(numbers) {
-//   var answer = numbers.map(v => v + '')
-//                       .sort((a, b) => (b + a) * 1 - (a + b) * 1)
-//                       .join('');
+//   const answer = numbers.sort((a, b) => `${b}${a}` - `${a}${b}`).join("");
 
-//   // let answer = numbers.sort((a, b) => `${b}${a}` - `${a}${b}`).join('');
-
-//   return answer[0] === '0' ? '0' : answer;
+//   return answer[0] === "0" ? "0" : answer;
 // }
