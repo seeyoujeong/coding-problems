@@ -1,55 +1,24 @@
 // 체육복
+
 function solution(n, lost, reserve) {
-  let answer = 0;
+  const clothes = Array(n + 1).fill(1);
 
-  lost.sort((a, b) => a - b);
-  reserve.sort((a, b) => a - b);
+  for (let i = 0; i < Math.max(lost.length, reserve.length); i += 1) {
+    clothes[lost[i]] -= 1;
+    clothes[reserve[i]] += 1;
+  }
 
-  const _reserve = reserve.filter(num => !lost.includes(num));
-  const _lost = lost.filter(num => !reserve.includes(num));
-
-  answer = n - _lost.length;
-
-  for (let num of _reserve) {
-    if (_lost.includes(num - 1)) {
-      _lost.splice(_lost.indexOf(num - 1), 1);
-      answer++;
-    } else if (_lost.includes(num + 1)) {
-      _lost.splice(_lost.indexOf(num + 1), 1);
-      answer++;
+  for (let i = 1; i < clothes.length; i += 1) {
+    if (clothes[i] === 0) {
+      if (clothes[i - 1] === 2) {
+        clothes[i] = 1;
+        clothes[i - 1] = 1;
+      } else if (clothes[i + 1] === 2) {
+        clothes[i] = 1;
+        clothes[i + 1] = 1;
+      }
     }
   }
 
-  return answer;
+  return clothes.slice(1).filter((num) => num !== 0).length;
 }
-
-// 다른 풀이
-// function solution(n, lost, reserve) {
-//   const students = {};
-//   let answer = 0;
-
-//   for(let i = 1; i <= n; i++){
-//     students[i] = 1;
-//   }
-
-//   lost.forEach(number => students[number] -= 1);
-//   reserve.forEach(number => students[number] += 1);
-
-//   for(let i = 1; i <= n; i++){
-//     if (students[i] === 2 && students[i - 1] === 0){
-//       students[i - 1]++;
-//       students[i]--;
-//     } else if (students[i] === 2 && students[i + 1] === 0){
-//       students[i + 1]++;
-//       students[i]--;
-//     }
-//   }
-
-//   for(let key in students){
-//       if(students[key] >= 1){
-//           answer++;
-//       }
-//   }
-
-//   return answer;
-// }

@@ -1,27 +1,18 @@
 // 실패율
+
 function solution(N, stages) {
-  return Array(N)
-    .fill(0)
-    .map((_, idx) => 
-      [idx + 1, 
-      stages.filter(stage => idx + 1 === stage).length / 
-      stages.filter(stage => stage >= idx + 1).length])
+  let reached = stages.length;
+  const stageCount = Array(N + 1).fill(0);
+
+  stages.forEach((stage) => (stageCount[stage] += 1));
+
+  return Array.from({ length: N }, (_, i) => {
+    const currentReached = reached;
+    const notClear = stageCount[i + 1];
+    reached -= notClear;
+
+    return [i + 1, notClear / currentReached];
+  })
     .sort((a, b) => b[1] - a[1])
-    .map(arr => arr[0]);
+    .map(([stage]) => stage);
 }
-
-// 다른 풀이
-// function solution(N, stages) {
-//   let result = [];
-
-//   for(let i = 1; i <= N; i++){
-//     let reach = stages.filter((x) => x >= i).length;
-//     let curr = stages.filter((x) => x === i).length;
-
-//     result.push([i, curr / reach]);
-//   }
-
-//   result.sort((a, b) => b[1] - a[1]);
-
-//   return result.map((x) => x[0]);
-// }

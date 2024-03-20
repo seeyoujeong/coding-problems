@@ -1,60 +1,23 @@
 // 숫자 짝꿍
+
 function solution(X, Y) {
-  let answer = '';
-  const arrX = [...X];
-  const arrY = [...Y];
+  const xNumbers = Array(10).fill(0);
+  const yNumbers = Array(10).fill(0);
 
-  for (let x of new Set(X)) {
-    if (Y.includes(x)) {
-      const lenX = arrX.filter(v => x === v).length;
-      const lenY = arrY.filter(v => x === v).length;
-
-      answer += x.repeat(Math.min(lenX, lenY));
-    } 
+  for (let i = 0; i < Math.max(X.length, Y.length); i += 1) {
+    xNumbers[X[i]] += 1;
+    yNumbers[Y[i]] += 1;
   }
 
-  if (answer === '') {
-    return '-1';
+  const resultNumber = xNumbers
+    .map((num, idx) => Math.min(num, yNumbers[idx]))
+    .reduce((acc, cur, idx) => [...acc, ...String(idx).repeat(cur)], [])
+    .sort((a, b) => b - a)
+    .join("");
+
+  if (resultNumber.length === 0) {
+    return "-1";
   }
 
-  if (+answer === 0) {
-    return '0';
-  }
-
-  return [...answer].sort((a, b) => b - a).join('');
+  return resultNumber[0] === "0" ? "0" : resultNumber;
 }
-
-// 다른 풀이
-// function solution(X, Y) {
-//   const [arrX, arrY] = [[...X], [...Y]];
-//   const answer = [...new Set(X)].reduce((acc, cur) => acc + (Y.includes(cur) ? 
-//           cur.repeat(Math.min(arrX.filter(v => cur === v).length, 
-//                               arrY.filter(v => cur === v).length)) : 
-//           ''), '');
-  
-//   return answer.length ? 
-//       (+answer ? [...answer].sort((a, b) => b - a).join('') : '0') :
-//       '-1';
-// }
-
-// function solution(X, Y) {
-//   let result = '';
-//   const numObj = {};
-
-//   for (const char of X) {
-//     numObj[char] = (numObj[char] | 0) + 1;
-//   }
-
-//   for (const char of Y) {
-//     if (!numObj[char]) continue;
-//     result += char;
-//     numObj[char]--;
-//   }
-
-//   if (result === '') return '-1';
-//   if (+result === 0) return '0';
-//   return [...result]
-//     .map(Number)
-//     .sort((a, b) => b - a)
-//     .join('');    
-// }

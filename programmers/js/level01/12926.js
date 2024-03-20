@@ -1,20 +1,26 @@
 // 시저 암호
+
 function solution(s, n) {
-  const utf16 = char => char.codePointAt(0);
-  const zCode = utf16('z');
-  const ZCode = utf16('Z');
-    
-  return s.split(' ').map(i => {
-    return [...i].map(j => {
-      const charCode = utf16(j);
-        
-      if (charCode + n > zCode) {
-        return String.fromCodePoint(utf16('a') + charCode + n - zCode - 1);
-      } else if (charCode <= ZCode && charCode + n > ZCode) {
-        return String.fromCodePoint(utf16('A') + charCode + n - ZCode - 1);
+  const zCodePoint = "z".codePointAt();
+  const ZCodePoint = "Z".codePointAt();
+
+  return [...s]
+    .map((char) => {
+      if (char === " ") {
+        return char;
       }
-        
-      return String.fromCodePoint(utf16(j) + n);
-    }).join('');
-  }).join(' ');
+
+      const codePoint = char.codePointAt();
+
+      if (codePoint + n > zCodePoint) {
+        return String.fromCodePoint(codePoint + n - 26);
+      }
+
+      if (codePoint + n > ZCodePoint && codePoint <= ZCodePoint) {
+        return String.fromCodePoint(codePoint + n - 26);
+      }
+
+      return String.fromCodePoint(codePoint + n);
+    })
+    .join("");
 }

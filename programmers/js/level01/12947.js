@@ -1,4 +1,6 @@
 // 하샤드 수
+
 function solution(x) {
-  return !(x % [...x.toString()].map(Number).reduce((a, b) => a + b, 0));
+  const sum = [...String(x)].reduce((acc, cur) => acc + Number(cur), 0);
+  return x % sum === 0;
 }

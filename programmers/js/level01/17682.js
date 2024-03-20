@@ -1,20 +1,41 @@
-// [1차] 다트 게임 
-function solution(dartResult) {
-  const result = [];
-  
-  for (const dart of dartResult.match(/(\d+)([SDT])([*#]*)/g)) {
-    let [num, area, option] = dart.split(/([SDT])/);
+// [1차] 다트 게임
 
-    if (area === 'S') area = 1;
-    if (area === 'D') area = 2;
-    if (area === 'T') area = 3;
-    if (option === '') option = 1;
-    if (option === '#') option = -1;
-    if (option === '*') option = result.length ? 
-      (result[result.length - 1] *= 2, 2) : 2;
-    
-    result.push(num ** area * option);
+function solution(dartResult) {
+  const scoreList = [];
+  let score = 0;
+  const bonus = {
+    S: 1,
+    D: 2,
+    T: 3,
+  };
+  const option = {
+    "#": -1,
+    "*": 2,
+  };
+
+  for (const current of dartResult) {
+    if (Number(current)) {
+      score += Number(current);
+    }
+
+    if (current === "0") {
+      score *= 10;
+    }
+
+    if (current === "S" || current === "D" || current === "T") {
+      score = score ** bonus[current];
+      scoreList.push(score);
+      score = 0;
+    }
+
+    if (current === "#" || current === "*") {
+      scoreList[scoreList.length - 1] *= option[current];
+
+      if (current === "*") {
+        scoreList[scoreList.length - 2] *= option[current];
+      }
+    }
   }
-  
-  return result.reduce((acc, cur) => acc + cur, 0);
+
+  return scoreList.reduce((acc, cur) => acc + cur, 0);
 }

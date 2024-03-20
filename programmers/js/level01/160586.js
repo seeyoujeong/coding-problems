@@ -1,41 +1,33 @@
 // 대충 만든 자판
-function solution(keymap, targets) {
-  const answer = [];
-  const countKeyObj = countKeymap(keymap);
 
-  for (const target of targets) {
+function solution(keymap, targets) {
+  const keymapObj = getKeymapObj(keymap);
+
+  return targets.map((target) => {
     let count = 0;
-    
-    for (const char of target) {
-      if (!(char in countKeyObj)) {
-        count = -1;
-        break;
-      }
-      
-      count += countKeyObj[char];
+
+    for (const key of target) {
+      if (!keymapObj[key]) return -1;
+
+      count += keymapObj[key];
     }
-    
-    if (count !== 0) {
-      answer.push(count);
-    }
-  }
-  
-  return answer;
+
+    return count;
+  });
 }
 
-function countKeymap(keymap) {
-  const keymapSet = new Set([...keymap.join('')]);
-  const keymapObj = {};
-  
-  keymapSet.forEach(k => {
-    keymap.forEach(key => {
-      if (key.includes(k)) {
-        const kIndex = key.indexOf(k);
-        keymapObj[k] = keymapObj[k] > kIndex ? 
-          kIndex + 1 : (keymapObj[k] || kIndex + 1);
+function getKeymapObj(keymap) {
+  const obj = {};
+
+  for (const keys of keymap) {
+    for (let i = 0; i < keys.length; i += 1) {
+      const key = keys[i];
+
+      if (!(key in obj) || obj[key] > i) {
+        obj[key] = i + 1;
       }
-    });
-  });
-  
-  return keymapObj;
+    }
+  }
+
+  return obj;
 }

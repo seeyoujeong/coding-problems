@@ -1,7 +1,8 @@
-// 폰켓몬
-function solution(nums) {
-  const pickNums = nums.length / 2;
-  const numsSetSize = (new Set(nums)).size;
+// 폰캣몬
 
-  return numsSetSize < pickNums ? numsSetSize : pickNums;
+function solution(nums) {
+  const dividedBy2 = nums.length / 2;
+  const nonDuplicateNums = new Set(nums).size;
+
+  return dividedBy2 > nonDuplicateNums ? nonDuplicateNums : dividedBy2;
 }

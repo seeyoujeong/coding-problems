@@ -1,9 +1,12 @@
 // 푸드 파이트 대회
-function solution(food) {    
-  const answer = food
+
+function solution(food) {
+  const arrangedFood = food
     .slice(1)
-    .map(elem => ~~(elem / 2))
-    .reduce((acc, cur, idx) => acc + `${idx + 1}`.repeat(cur), '');
-  
-  return answer + '0' + [...answer].reverse().join('');
+    .reduce(
+      (acc, cur, idx) => acc + String(idx + 1).repeat(Math.floor(cur / 2)),
+      ""
+    );
+
+  return arrangedFood + "0" + [...arrangedFood].reverse().join("");
 }

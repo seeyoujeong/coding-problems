@@ -1,67 +1,32 @@
 // 문자열 나누기
+
 function solution(s) {
-  let firstChar;
-  let firstCharCount = 0;
+  let stringCount = 0;
+  let currentChar = "";
+  let currentCharCount = 0;
   let otherCharCount = 0;
-    
-  return [...s].reduce((acc, cur) => {
-    if (firstCharCount === otherCharCount) {
-      acc++;
-      firstChar = cur;
-      firstCharCount = 0;
+
+  for (let char of s) {
+    if (currentChar === "") {
+      currentChar = char;
+      currentCharCount = 1;
       otherCharCount = 0;
+      continue;
     }
-    
-    firstChar === cur ? firstCharCount++ : otherCharCount++;
-    
-    return acc;
-  }, 0);
+
+    if (currentChar === char) {
+      currentCharCount += 1;
+    }
+
+    if (currentChar !== char) {
+      otherCharCount += 1;
+    }
+
+    if (currentCharCount === otherCharCount) {
+      currentChar = "";
+      stringCount += 1;
+    }
+  }
+
+  return currentChar.length > 0 ? stringCount + 1 : stringCount;
 }
-
-// 다른 풀이
-// function solution(s) {
-//   var answer = 0;
-//   let firstChar = s[0];
-//   let firstCharCount = 0;
-//   let otherCharCount = 0;
-
-//   for (let i = 0; i < s.length; i++) {
-//     if (firstChar === s[i]) {
-//       firstCharCount++;
-//     } else {
-//       otherCharCount++;
-//     }
-
-//     if (firstCharCount === otherCharCount) {
-//       answer++;
-//       firstChar = s[i + 1];
-//       firstCharCount = 0;
-//       otherCharCount = 0;
-//     }
-
-//     if (i === s.length - 1 && firstCharCount !== otherCharCount) {
-//       answer++;
-//     }
-//   }
-
-//   return answer;
-// }
-
-// function solution(s) {
-//   let answer = 0;
-//   let current;
-//   let count = 0;
-
-//   for (let i = 0; i < s.length; i++) {
-//     if (count === 0) {
-//       answer++;
-//       current = s[i];
-//       count = 1;
-//     } else {
-//       if(current !== s[i]) count--;
-//       else count++;
-//     }
-//   }
-
-//   return answer;
-// }

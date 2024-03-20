@@ -1,18 +1,13 @@
 // 콜라 문제
-function solution(a, b, n) {
-  let answer = 0;
-  let bottle = n;
 
-  while (bottle >= a) {
-    const tmp = ~~(bottle / a) * b;
-    bottle = tmp + (bottle % a);
-    answer += tmp;
+function solution(a, b, n) {
+  let totalCount = 0;
+
+  while (n >= a) {
+    const receivedCount = parseInt(n / a, 10) * b;
+    totalCount += receivedCount;
+    n = receivedCount + (n % a);
   }
 
-  return answer;
+  return totalCount;
 }
-
-// 다른 풀이
-// function solution(a, b, n) {
-//   return ~~((n - b) / (a - b)) * b;
-// }

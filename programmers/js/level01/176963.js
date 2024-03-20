@@ -1,11 +1,13 @@
 // 추억 점수
-function solution(name, yearning, photo) {
-  const nameYearning = name.reduce((acc, cur, idx) => {
-    acc[cur] = yearning[idx];
-    return acc;
-  }, {});
 
-  return photo.map((names) =>
-    names.reduce((acc, cur) => acc + (nameYearning[cur] ?? 0), 0)
+function solution(name, yearning, photo) {
+  return photo.map((people) =>
+    people.reduce((score, person) => {
+      if (name.includes(person)) {
+        score += yearning[name.indexOf(person)];
+      }
+
+      return score;
+    }, 0)
   );
 }

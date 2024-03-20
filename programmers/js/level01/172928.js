@@ -1,122 +1,141 @@
 // 공원 산책
+
 function solution(park, routes) {
-  const start = park.join("").indexOf("S");
-  const [parkX, parkY] = [park[0].length, park.length];
-  let [currentX, currentY] = [start % parkX, Math.floor(start / parkX)];
-  const obstacle = [...park.join("")].reduce((acc, cur, idx) => {
-    if (cur === "X") {
-      acc.push([idx % parkX, Math.floor(idx / parkX)]);
-    }
+  let currentPosition;
+  const obstacles = [];
+  const rowLength = park.length;
+  const colLength = park[0].length;
 
-    return acc;
-  }, []);
+  for (let i = 0; i < rowLength; i += 1) {
+    for (let j = 0; j < colLength; j += 1) {
+      const position = park[i][j];
 
-  for (const route of routes) {
-    const [direction, distance] = route.split(" ");
-    let flag = false;
-
-    if (direction === "N") {
-      if (currentY - +distance < 0) {
-        continue;
+      if (position === "S") {
+        currentPosition = [i, j];
       }
 
-      for (const [x, y] of obstacle) {
-        if (currentX === x && currentY >= y && currentY - +distance <= y) {
-          flag = true;
-          break;
-        }
+      if (position === "X") {
+        obstacles.push([i, j]);
       }
-
-      if (flag) {
-        continue;
-      }
-
-      currentY -= +distance;
-    }
-
-    if (direction === "S") {
-      if (currentY + +distance > parkY - 1) {
-        continue;
-      }
-
-      for (const [x, y] of obstacle) {
-        if (currentX === x && currentY <= y && currentY + +distance >= y) {
-          flag = true;
-          break;
-        }
-      }
-
-      if (flag) {
-        continue;
-      }
-
-      currentY += +distance;
-    }
-
-    if (direction === "W") {
-      if (currentX - +distance < 0) {
-        continue;
-      }
-
-      for (const [x, y] of obstacle) {
-        if (currentY === y && currentX >= x && currentX - +distance <= x) {
-          flag = true;
-          break;
-        }
-      }
-
-      if (flag) {
-        continue;
-      }
-
-      currentX -= +distance;
-    }
-
-    if (direction === "E") {
-      if (currentX + +distance > parkX - 1) {
-        continue;
-      }
-
-      for (const [x, y] of obstacle) {
-        if (currentY === y && currentX <= x && currentX + +distance >= x) {
-          flag = true;
-          break;
-        }
-      }
-
-      if (flag) {
-        continue;
-      }
-
-      currentX += +distance;
     }
   }
 
-  return [currentY, currentX];
+  for (const route of routes) {
+    const [direction, move] = route.split(" ");
+
+    if (
+      checkPosition({
+        position: currentPosition,
+        range: [rowLength, colLength],
+        direction,
+        move: Number(move),
+      }) &&
+      checkObstacle({
+        position: currentPosition,
+        obstacles,
+        direction,
+        move: Number(move),
+      })
+    ) {
+      currentPosition = movePosition({
+        position: currentPosition,
+        direction,
+        move: Number(move),
+      });
+
+      console.log(currentPosition);
+    }
+  }
+
+  return currentPosition;
 }
 
+function checkObstacle({ position, obstacles, direction, move }) {
+  const [y, x] = position;
 
-// 다른 풀이
-// function solution(park, routes) {
-//   const dirs = { E: [0, 1], W: [0, -1], S: [1, 0], N: [-1, 0] };
-//   let [x, y] = [0, 0];
-//   for (let i = 0; i < park.length; i++) {
-//     if (park[i].includes('S')) {
-//       [x, y] = [i, park[i].indexOf('S')];
-//       break;
-//     }
-//   }
+  if (obstacles.length === 0) {
+    return true;
+  }
 
-//   routes.forEach((route) => {
-//     const [r, n] = route.split(' ');
-//     let [nx, ny] = [x, y];
-//     let cnt = 0;
-//     while (cnt < n) {
-//       [nx, ny] = [nx + dirs[r][0], ny + dirs[r][1]];
-//       if (!park[nx] || !park[nx][ny] || park[nx][ny] === 'X') break;
-//       cnt++;
-//     }
-//     if (cnt == n) [x, y] = [nx, ny];
-//   });
-//   return [x, y];
-// }
+  for (const [obstacleY, obstacleX] of obstacles) {
+    switch (direction) {
+      case "N": {
+        if (x === obstacleX && obstacleY < y && y - move <= obstacleY) {
+          return false;
+        }
+        break;
+      }
+      case "S": {
+        if (x === obstacleX && obstacleY > y && obstacleY <= y + move) {
+          return false;
+        }
+        break;
+      }
+      case "W": {
+        if (y === obstacleY && obstacleX < x && x - move <= obstacleX) {
+          return false;
+        }
+        break;
+      }
+      case "E": {
+        if (y === obstacleY && obstacleX > x && obstacleX <= x + move) {
+          return false;
+        }
+        break;
+      }
+    }
+  }
+
+  return true;
+}
+
+function checkPosition({ position, range, direction, move }) {
+  const [y, x] = position;
+  const [rowLength, colLength] = range;
+
+  switch (direction) {
+    case "N": {
+      if (y - move < 0) return false;
+      break;
+    }
+    case "S": {
+      if (y + move >= rowLength) return false;
+      break;
+    }
+    case "W": {
+      if (x - move < 0) return false;
+      break;
+    }
+    case "E": {
+      if (x + move >= colLength) return false;
+      break;
+    }
+  }
+
+  return true;
+}
+
+function movePosition({ position, direction, move }) {
+  let [y, x] = position;
+
+  switch (direction) {
+    case "N": {
+      y -= move;
+      break;
+    }
+    case "S": {
+      y += move;
+      break;
+    }
+    case "W": {
+      x -= move;
+      break;
+    }
+    case "E": {
+      x += move;
+      break;
+    }
+  }
+
+  return [y, x];
+}

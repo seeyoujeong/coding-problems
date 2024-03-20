@@ -1,19 +1,20 @@
 // 바탕화면 정리
-function solution(wallpaper) {
-  const x = [];
-  const y = [];
 
-  wallpaper.forEach((elem, i) => {
-    [...elem].forEach((val, j) => {
-      if (val === '#') {
-        x.push(i);
-        y.push(j);
+function solution(wallpaper) {
+  const xIndexes = [];
+  const yIndexes = [];
+
+  wallpaper.forEach((row, rowIdx) => {
+    [...row].forEach((col, colIdx) => {
+      if (col === "#") {
+        xIndexes.push(rowIdx);
+        yIndexes.push(colIdx);
       }
     });
   });
 
-  x.sort((a, b) => a - b);
-  y.sort((a, b) => a - b);
+  xIndexes.sort((a, b) => a - b);
+  yIndexes.sort((a, b) => a - b);
 
-  return [x[0], y[0], x.at(-1) + 1, y.at(-1) + 1];
+  return [xIndexes[0], yIndexes[0], xIndexes.at(-1) + 1, yIndexes.at(-1) + 1];
 }
