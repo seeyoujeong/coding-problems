@@ -1,73 +1,45 @@
 // [3차] 방금그곡
+
 function solution(m, musicinfos) {
-  var answer = '';
-  let musicInfos = [];
+  const newMelody = replaceSharp(m);
+  const newMusicInfos = musicinfos.map((info) => {
+    const [start, end, title, melody] = info.split(",");
+    const playingTime = getMinute(end) - getMinute(start);
+    const newMelody = replaceSharp(melody);
+    const playedMelody =
+      newMelody.length > playingTime
+        ? newMelody.slice(0, playingTime)
+        : newMelody.repeat(Math.ceil(playingTime / newMelody.length));
 
-  musicinfos = musicinfos.map(info => info.split(','));
-  m = replaceSharp(m);
+    return [playingTime, title, playedMelody];
+  });
 
-  for (let info of musicinfos) {
-    let startTime = info[0].split(':');
-    let endTime = info[1].split(':');
+  const filteredMusicInfos = newMusicInfos.filter(([, , melody]) =>
+    melody.includes(newMelody)
+  );
 
-    if (startTime[0] > endTime[0]) {
-      endTime[0] = 24 + +endTime[0];
-    }
-
-    let time = ((+endTime[0] - +startTime[0]) * 60) + +endTime[1] - +startTime[1];
-    let title = info[2];
-
-    info[3] = replaceSharp(info[3]);
-
-    let sheet = info[3].length > time ? 
-      info[3].slice(0, time) : 
-      info[3].repeat(Math.ceil(time / info[3].length));
-
-    musicInfos.push([time, title, sheet]);
+  if (filteredMusicInfos.length === 0) {
+    return "(None)";
   }
 
-  musicInfos = musicInfos.filter(info => info[2].includes(m));
+  filteredMusicInfos.sort(([time1], [time2]) => time2 - time1);
 
-  if (musicInfos.length == 0) {
-    answer = '(None)';
-  } else if (musicInfos.length == 1) {
-    answer = musicInfos[0][1];
-  } else {
-    let maxTime = Math.max(...musicInfos.map(info => info[0]));
-    musicInfos = musicInfos.filter(info => info[0] == maxTime);
-    answer = musicInfos[0][1];
-  }
-
-  return answer;
+  return filteredMusicInfos[0][1];
 }
 
-function replaceSharp(str) {
-  const sharpArr = ['C#', 'D#', 'F#', 'G#', 'A#'];
-  const replaceArr = ['c', 'd', 'f', 'g', 'a'];
+function getMinute(time) {
+  const [hours, minutes] = time.split(":").map(Number);
 
-  for (let i = 0; i < sharpArr.length; i++) {
-    const regex = new RegExp(`(${sharpArr[i]})`, 'g');
-    str = str.replace(regex, replaceArr[i]);
-  }
-
-  return str;
+  return hours * 60 + minutes;
 }
 
-// 다른 풀이
-// function solution(m, musicInfos) {
-//   let answer = '';
+function replaceSharp(melody) {
+  const sharpList = ["C#", "D#", "F#", "G#", "A#"];
+  const replaceList = ["c", "d", "f", "g", "a"];
 
-//   musicInfos = musicInfos.map(e => {
-//     let eArr = e.split(',');
-//     let timeDiff = (new Date(`1970-01-01 ${eArr[1]}:00`) - new Date(`1970-01-01 ${eArr[0]}:00`)) / 60000;
-//     let melody = eArr[3].replace(/[A-Z]#/g,m => m[0].toLowerCase());
-//     melody = melody.repeat(Math.ceil(timeDiff / melody.length)).substr(0, timeDiff);
-//     return `${timeDiff},${eArr[2]},${melody}`;
-//   });
+  sharpList.forEach((sharp, idx) => {
+    melody = melody.replaceAll(sharp, replaceList[idx]);
+  });
 
-//   musicInfos.sort((a,b) => b.split(',')[0] - a.split(',')[0]);
-
-//   answer = musicInfos.filter(e => e.split(',')[2].indexOf(m.replace(/[A-Z]#/g,m => m[0].toLowerCase())) != -1);
-
-//   return answer.length == 0 ? '(None)' : answer[0].split(',')[1];
-// }
+  return melody;
+}

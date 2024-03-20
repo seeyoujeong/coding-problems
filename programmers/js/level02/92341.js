@@ -1,35 +1,62 @@
-// 주차 요금 계산
+// 추가 요금 계산
+
 function solution(fees, records) {
-  const MAX_TIME = 1439;
-  const parkingRecords = new Map();
+  const recordsInfo = records.reduce((acc, cur) => {
+    const [time, carNumber, state] = cur.split(" ");
 
-  records.forEach((record) => {
-    const [time, carNumber, state] = record.split(" ");
-    const [h, m] = time.split(":");
-    const minute = parseInt(h) * 60 + parseInt(m);
+    if (Object.hasOwn(acc, carNumber)) {
+      if (state === "IN") {
+        acc[carNumber].entryTime = time;
+      }
 
-    if (!parkingRecords.has(carNumber)) {
-      parkingRecords.set(carNumber, 0);
+      if (state === "OUT") {
+        acc[carNumber].accumulatedTime += getMinutes(
+          acc[carNumber].entryTime,
+          time
+        );
+        acc[carNumber].entryTime = null;
+      }
+    } else {
+      acc[carNumber] = {
+        entryTime: time,
+        accumulatedTime: 0,
+      };
     }
 
-    const accumulatedTime = parkingRecords.get(carNumber);
-
-    if (state === "IN") {
-      parkingRecords.set(carNumber, accumulatedTime + (MAX_TIME - minute));
-    }
-
-    if (state === "OUT") {
-      parkingRecords.set(carNumber, accumulatedTime - (MAX_TIME - minute));
-    }
-  });
+    return acc;
+  }, {});
 
   const [defaultTime, defaultFee, perTime, perFee] = fees;
 
-  return [...parkingRecords]
-    .sort((a, b) => a[0] - b[0])
-    .map(([_, time]) => {
-      if (defaultTime >= time) return defaultFee;
+  for (const carNumber in recordsInfo) {
+    if (recordsInfo[carNumber].entryTime) {
+      recordsInfo[carNumber].accumulatedTime += getMinutes(
+        recordsInfo[carNumber].entryTime,
+        "23:59"
+      );
+      recordsInfo[carNumber].entryTime = null;
+    }
 
-      return defaultFee + Math.ceil((time - defaultTime) / perTime) * perFee;
-    });
+    if (recordsInfo[carNumber].accumulatedTime <= defaultTime) {
+      recordsInfo[carNumber] = defaultFee;
+    } else {
+      recordsInfo[carNumber] =
+        defaultFee +
+        Math.ceil(
+          (recordsInfo[carNumber].accumulatedTime - defaultTime) / perTime
+        ) *
+          perFee;
+    }
+  }
+
+  return Object.entries(recordsInfo)
+    .sort((a, b) => a[0] - b[0])
+    .map(([_, fee]) => fee);
+}
+
+function getMinutes(entryTime, exitTime) {
+  const [entryHour, entryMinutes] = entryTime.split(":").map(Number);
+  const [exitHour, exitMinutes] = exitTime.split(":").map(Number);
+
+  return (exitHour - entryHour) * 60 + (exitMinutes - entryMinutes);
 }

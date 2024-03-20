@@ -1,29 +1,28 @@
 // [3차] 압축
+
 function solution(msg) {
-  const answer = [];
-  let lastIndex = 26;
-  const map = new Map();
+  const dictionary = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].reduce(
+    (acc, cur, idx) => ((acc[cur] = idx + 1), acc),
+    {}
+  );
+  let nextIdx = 27;
 
-  for (let i = "A".codePointAt(0); i <= "Z".codePointAt(0); i++) {
-    map.set(String.fromCodePoint(i), i - 64);
-  }
+  const result = [];
 
-  for (let i = 0; i < msg.length; i++) {
+  for (let i = 0; i < msg.length; i += 1) {
     let w = msg[i];
     let c = msg[i + 1];
 
-    while (map.has(w + c)) {
-      w = w + c;
-      i = i + 1;
+    while (w + c in dictionary) {
+      w += c;
+      i += 1;
       c = msg[i + 1];
     }
 
-    if (!map.has(w + c)) {
-      answer.push(map.get(w));
-      lastIndex++;
-      map.set(w + c, lastIndex);
-    }
+    result.push(dictionary[w]);
+    dictionary[w + c] = nextIdx;
+    nextIdx += 1;
   }
 
-  return answer;
+  return result;
 }

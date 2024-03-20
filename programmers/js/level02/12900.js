@@ -1,26 +1,18 @@
 // 2 x n 타일링
+
 function solution(n) {
-  var answer = 0;
-  let a = 0;
-  let b = 1;
+  if (n === 1) {
+    return n;
+  }
 
-  if (n <= 1) return n;
+  const DIVIDE_NUMBER = 1_000_000_007;
+  let count = 0;
+  let [a, b] = [1, 1];
 
-  for (let i = 2; i <= n + 1; i++) {
-    answer = a + b;
-    a = b % 1000000007;
-    b = answer % 1000000007;
-  } 
+  for (let i = 2; i <= n; i += 1) {
+    count = (a + b) % DIVIDE_NUMBER;
+    [a, b] = [b % DIVIDE_NUMBER, count];
+  }
 
-  return answer % 1000000007;
+  return count;
 }
-
-// 다른 풀이
-// function solution(n) {
-//   const arr = [0, 1, 2];
-//   for (let i = 3; i <= n; i++) {
-//     arr[i] = (arr[i - 2] + arr[i - 1]) % 1000000007;
-//   }
-
-//   return arr[n];
-// }

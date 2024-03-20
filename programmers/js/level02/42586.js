@@ -1,21 +1,18 @@
 // 기능개발
-function solution(progresses, speeds) {
-  const remainDays = progresses.map((progress, index) =>
-    Math.ceil((100 - progress) / speeds[index])
-  );
-  let maxDay = remainDays[0];
 
-  return remainDays.reduce(
-    (acc, cur) => {
-      if (maxDay >= cur) {
-        acc[acc.length - 1] += 1;
-      } else {
+function solution(progresses, speeds) {
+  let maxDay;
+
+  return progresses
+    .map((progress, idx) => Math.ceil((100 - progress) / speeds[idx]))
+    .reduce((acc, cur) => {
+      if (maxDay === undefined || maxDay < cur) {
         acc.push(1);
         maxDay = cur;
+      } else {
+        acc[acc.length - 1] += 1;
       }
 
       return acc;
-    },
-    [0]
-  );
+    }, []);
 }

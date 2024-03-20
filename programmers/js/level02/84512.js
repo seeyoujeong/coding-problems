@@ -1,31 +1,19 @@
 // 모음사전
-function solution(word) {
-  const vowels = ["", "A", "E", "I", "O", "U"];
-  const set = new Set();
 
-  function recursion(len, str) {
-    if (len === 0) {
-      set.add(str);
-      return;
+function solution(words) {
+  const dictionary = [];
+
+  const addWord = (currentWord, dep) => {
+    if (dep <= 5) {
+      dictionary.push(currentWord);
+
+      for (const char of ["A", "E", "I", "O", "U"]) {
+        addWord(currentWord + char, dep + 1);
+      }
     }
+  };
 
-    for (const char of vowels) {
-      recursion(len - 1, `${str}${char}`);
-    }
-  }
+  addWord("", 0);
 
-  recursion(5, "");
-
-  return [...set].sort().indexOf(word);
+  return dictionary.indexOf(words);
 }
-
-// 다른 풀이
-// function solution(words) {
-//   return [...words].reduce(
-//     (acc, cur, idx) =>
-//       acc +
-//       [781, 156, 31, 6, 1][idx] * ["A", "E", "I", "O", "U"].indexOf(cur) +
-//       1,
-//     0
-//   );
-// }

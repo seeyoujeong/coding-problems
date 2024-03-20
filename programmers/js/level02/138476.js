@@ -1,25 +1,23 @@
 // 귤 고르기
+
 function solution(k, tangerine) {
-  let answer = 0;
-  let sum = 0;
-  const numOfSize = {};
-  
-  for (const size of tangerine) {
-    numOfSize[size] = (numOfSize[size] || 0) + 1;
-    
-    if (numOfSize[size] >= k) {
-      return 1;
-    }
-  }
-  
-  for (const num of Object.values(numOfSize).sort((a, b) => b - a)) {
-    sum += num;
-    answer++;
-    
-    if (sum >= k) {
+  const tangerineObj = tangerine.reduce((acc, cur) => {
+    acc[cur] = cur in acc ? acc[cur] + 1 : 1;
+
+    return acc;
+  }, {});
+
+  let sumOfWeight = 0;
+  let count = 0;
+
+  for (const weight of Object.values(tangerineObj).sort((a, b) => b - a)) {
+    sumOfWeight += weight;
+    count += 1;
+
+    if (sumOfWeight >= k) {
       break;
     }
   }
 
-  return answer;
+  return count;
 }

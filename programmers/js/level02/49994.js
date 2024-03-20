@@ -1,31 +1,27 @@
 // 방문 길이
+
 function solution(dirs) {
-  const record = new Set();
-  let coordinate = [0, 0];
-  const recording = (prevCoord, coord) => {
-    record.add(prevCoord + coord);
-    record.add(coord + prevCoord);
+  const dirObject = {
+    U: [0, 1],
+    D: [0, -1],
+    R: [1, 0],
+    L: [-1, 0],
   };
+  let currentLocation = [0, 0];
 
-  for (let dir of dirs) {
-    let prevCoordinate = coordinate.join("");
+  return (
+    Array.from(dirs).reduce((acc, cur) => {
+      const [currentX, currentY] = currentLocation;
+      const [dirX, dirY] = dirObject[cur];
+      const [nextX, nextY] = [currentX + dirX, currentY + dirY];
 
-    if (dir === "U") {
-      if (coordinate[1] === 5) continue;
-      coordinate[1]++;
-    } else if (dir === "D") {
-      if (coordinate[1] === -5) continue;
-      coordinate[1]--;
-    } else if (dir === "R") {
-      if (coordinate[0] === 5) continue;
-      coordinate[0]++;
-    } else if (dir === "L") {
-      if (coordinate[0] === -5) continue;
-      coordinate[0]--;
-    }
+      if (-5 <= nextX && nextX <= 5 && -5 <= nextY && nextY <= 5) {
+        acc.add(`${currentX}${currentY}${nextX}${nextY}`);
+        acc.add(`${nextX}${nextY}${currentX}${currentY}`);
+        currentLocation = [nextX, nextY];
+      }
 
-    recording(prevCoordinate, coordinate.join(""));
-  }
-
-  return record.size / 2;
+      return acc;
+    }, new Set()).size / 2
+  );
 }

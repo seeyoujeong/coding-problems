@@ -1,26 +1,17 @@
 // [3차] 파일명 정렬
+
 function solution(files) {
   return files
     .map((file) => {
-      const arr = [];
+      const regexp = /([a-zA-Z .-]+)([\d]{1,5})([a-zA-Z0-9 .-]*)/;
+      const [, head, number, tail] = file.match(regexp);
 
-      arr.push(file.match(/^[a-zA-Z-\s]*/)[0]);
-      file = file.replace(/^[a-zA-Z-\s]*/, "");
-      arr.push(file.match(/^[0-9]*/)[0]);
-      file = file.replace(/^[0-9]*/, "");
-      arr.push(file);
-
-      return arr;
+      return [head, number, tail];
     })
-    .sort((a, b) => {
-      const aHead = a[0].toUpperCase();
-      const bHead = b[0].toUpperCase();
-
-      if (aHead === bHead) {
-        return a[1] - b[1];
-      }
-
-      return aHead.localeCompare(bHead);
-    })
+    .sort(([head1, number1], [head2, number2]) =>
+      head1.toLowerCase() === head2.toLowerCase()
+        ? number1 - number2
+        : head1.toLowerCase().localeCompare(head2.toLowerCase())
+    )
     .map((file) => file.join(""));
 }

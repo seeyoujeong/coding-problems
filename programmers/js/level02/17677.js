@@ -1,35 +1,33 @@
 // [1차] 뉴스 클러스터링
+
 function solution(str1, str2) {
   const str1Multiset = getMultiset(str1);
   const str2Multiset = getMultiset(str2);
-  const set = new Set([...str1Multiset, ...str2Multiset]);
-  let intersectionLength = 0;
-  let unionLength = 0;
+  const elements = new Set([...str1Multiset, ...str2Multiset]);
+  let unionSize = 0;
+  let intersectionSize = 0;
 
-  for (const elem of set) {
-    const str1MultisetLength = str1Multiset.filter(
-      (val) => elem === val
-    ).length;
-    const str2MultisetLength = str2Multiset.filter(
-      (val) => elem === val
-    ).length;
-    intersectionLength += Math.min(str1MultisetLength, str2MultisetLength);
-    unionLength += Math.max(str1MultisetLength, str2MultisetLength);
+  for (const element of elements) {
+    const str1Count = str1Multiset.filter((value) => value === element).length;
+    const str2Count = str2Multiset.filter((value) => value === element).length;
+
+    unionSize += Math.max(str1Count, str2Count);
+    intersectionSize += Math.min(str1Count, str2Count);
   }
 
-  return unionLength === 0
-    ? 65536
-    : Math.floor((intersectionLength / unionLength) * 65536);
+  const JaccardSimilarity = unionSize === 0 ? 1 : intersectionSize / unionSize;
+
+  return Math.trunc(JaccardSimilarity * 65536);
 }
 
-function getMultiset(str) {
+function getMultiset(string) {
   const result = [];
 
-  for (let i = 0; i < str.length - 1; i++) {
-    const elem = str.slice(i, i + 2);
+  for (let i = 0; i < string.length - 1; i += 1) {
+    const twoLetters = string.slice(i, i + 2).toLowerCase();
 
-    if (/[a-zA-Z]{2}/.test(elem)) {
-      result.push(elem.toLowerCase());
+    if (twoLetters.search(/[a-zA-Z]{2}/) !== -1) {
+      result.push(twoLetters);
     }
   }
 

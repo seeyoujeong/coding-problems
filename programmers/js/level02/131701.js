@@ -1,31 +1,16 @@
 // 연속 부분 수열 합의 개수
+
 function solution(elements) {
-  const len = elements.length;
-  const result = new Set();
+  const sumOfSequenceSet = new Set();
+  const circule = elements.concat(elements);
 
-  elements.push(...elements);
-
-  for (let i = 1; i <= len; i++) {
-    for (let j = 0; j < len; j++) {
-      result.add(elements.slice(j, i + j).reduce((acc, cur) => acc + cur, 0));
+  for (let len = 1; len < elements.length; len += 1) {
+    for (let start = 0; start < elements.length; start += 1) {
+      sumOfSequenceSet.add(
+        circule.slice(start, start + len).reduce((acc, cur) => acc + cur, 0)
+      );
     }
   }
 
-  return result.size;
+  return sumOfSequenceSet.size + 1;
 }
-
-// 다른 풀이
-// function solution(elements) {
-//   const circular = elements.concat(elements);
-//   const set = new Set();
-
-//   for (let i = 0; i < elements.length; i++) {
-//     let sum = 0;
-//     for (let j = 0; j < elements.length; j++) {
-//       sum += circular[i + j];
-//       set.add(sum);
-//     }
-//   }
-
-//   return set.size;
-// }

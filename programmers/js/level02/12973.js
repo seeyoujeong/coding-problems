@@ -1,14 +1,15 @@
 // 짝지어 제거하기
+
 function solution(s) {
   const stack = [];
-  
-  [...s].forEach(char => {
-    if (stack.at(-1) === char) {
+
+  for (const char of s) {
+    if (char === stack.at(-1)) {
       stack.pop();
     } else {
       stack.push(char);
     }
-  });
-  
-  return stack.length ? 0 : 1;
+  }
+
+  return stack.length === 0 ? 1 : 0;
 }
