@@ -1,20 +1,24 @@
 // 평행
+
 function solution(dots) {
-  const EXIST = 1;
-  const NOT_EXIST = 0;
-  const gradients = new Set();
-  
-  for (let i = 0; i < dots.length - 1; i++) {
-    for (let j = i + 1; j < dots.length; j++) {
-      const gradient = (dots[i][1] - dots[j][1]) / (dots[i][0] - dots[j][0]);
-      
-      if (gradients.has(gradient)) {
-        return EXIST;
-      } else {
-        gradients.add(gradient);
-      }
+  const caseArr = [
+    [0, 1, 2, 3],
+    [0, 2, 1, 3],
+    [0, 3, 1, 2],
+  ];
+
+  for (const [idx1, idx2, idx3, idx4] of caseArr) {
+    if (
+      calcGradient(dots[idx1], dots[idx2]) ===
+      calcGradient(dots[idx3], dots[idx4])
+    ) {
+      return 1;
     }
   }
-  
-  return NOT_EXIST;
+
+  return 0;
+}
+
+function calcGradient(arr1, arr2) {
+  return (arr2[1] - arr1[1]) / (arr2[0] - arr1[0]);
 }
