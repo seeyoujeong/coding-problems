@@ -1,35 +1,23 @@
 // 이중우선순위큐
+
 function solution(operations) {
-  var answer = [];
-  const queue = [];
-  
-  operations.forEach(oper => {
-    const [cmd, num] = oper.split(' ');
-    
-    if (cmd === 'I') {
-      queue.push(+num);
-    }
-    
-    if (cmd === 'D' && queue.length > 0) {
-      if (num == 1) {
+  let queue = [];
+
+  for (const oper of operations) {
+    const [command, data] = oper.split(" ");
+
+    if (command === "I") {
+      queue.push(Number(data));
+    } else if (command === "D") {
+      if (data === "1") {
         queue.sort((a, b) => a - b);
-        queue.pop();
-      }
-      
-      if (num == -1) {
+      } else if (data === "-1") {
         queue.sort((a, b) => b - a);
-        queue.pop();
       }
+
+      queue.pop();
     }
-  });
-  
-  if (queue.length === 0) {
-    answer = [0, 0];
-  } else {
-    queue.sort((a, b) => b - a);
-    answer.push(queue[0]);
-    answer.push(queue.at(-1));
   }
-  
-  return answer;
+
+  return queue.length === 0 ? [0, 0] : [Math.max(...queue), Math.min(...queue)];
 }
