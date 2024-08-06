@@ -1,22 +1,25 @@
 // 베스트앨범
+
 function solution(genres, plays) {
-  const genreMap = new Map();
+  const data = genres.reduce((acc, cur, idx) => {
+    if (cur in acc) {
+      acc[cur].count += plays[idx];
+      acc[cur].list.push([idx, plays[idx]]);
+      acc[cur].list.sort((a, b) => b[1] - a[1]);
+    } else {
+      acc[cur] = {
+        count: plays[idx],
+        list: [[idx, plays[idx]]],
+      };
+    }
 
-  for (let i = 0; i < genres.length; i += 1) {
-    const data = genreMap.get(genres[i]) || { total: 0, songs: [] };
+    return acc;
+  }, {});
 
-    genreMap.set(genres[i], {
-      total: data.total + plays[i],
-      songs: [...data.songs, { play: plays[i], index: i }]
-        .sort((a, b) => b.play - a.play)
-        .slice(0, 2),
-    });
-  }
-
-  return [...genreMap]
-    .sort((a, b) => b[1].total - a[1].total)
-    .flatMap((item) => item[1].songs)
-    .map((song) => song.index);
+  return Object.values(data)
+    .sort((a, b) => b.count - a.count)
+    .flatMap(({ list }) => list.slice(0, 2))
+    .map(([id]) => id);
 }
 
 // 데브코스
