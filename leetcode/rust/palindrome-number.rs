@@ -31,3 +31,15 @@ impl Solution2 {
         x == reversed
     }
 }
+
+impl Solution3 {
+    pub fn is_palindrome(x: i32) -> bool {
+        if x < 0 {
+            return false;
+        }
+
+        let str_x = x.to_string();
+
+        str_x.chars().rev().eq(str_x.chars())
+    }
+}
