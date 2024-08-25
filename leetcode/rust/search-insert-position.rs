@@ -1,4 +1,4 @@
-impl Solution {
+impl Solution1 {
     pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
         let mut left = 0;
         let mut right = nums.len() - 1;
@@ -21,5 +21,14 @@ impl Solution {
         }
 
         left as i32
+    }
+}
+
+impl Solution2 {
+    pub fn search_insert(nums: Vec<i32>, target: i32) -> i32 {
+        (match nums.binary_search(&target) {
+            Ok(i) => i,
+            Err(i) => i,
+        }) as i32
     }
 }
