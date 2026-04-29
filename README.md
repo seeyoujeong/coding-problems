@@ -6,6 +6,8 @@
 - java
 - python
 - rust
+- go
+- shell
 
 ### site
 
